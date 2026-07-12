@@ -1268,9 +1268,6 @@ body.light-mode .pink-text p {
     object-position: center;
     opacity: 0;
     transition: opacity 2s ease-in-out;
-    will-change: opacity;
-    transform: translateZ(0);
-    backface-visibility: hidden;
 }
 
 .slideshow-bg img.active,

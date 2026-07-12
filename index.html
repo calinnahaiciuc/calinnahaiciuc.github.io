@@ -1262,6 +1262,8 @@
                         media.muted = true;
                         media.playsInline = true;
                         media.preload = 'metadata'; // prevent full load upfront
+                    } else {
+                        media.loading = 'lazy'; // save memory on load
                     }
 
                     if (index === 0) {
