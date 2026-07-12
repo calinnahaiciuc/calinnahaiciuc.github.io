@@ -1187,7 +1187,7 @@
         // Setările observer-ului: se activează când centrul secțiunii ajunge la jumătatea ecranului
         const observerOptions = {
             root: null,
-            rootMargin: '-50% 0px -50% 0px',
+            rootMargin: window.innerWidth <= 768 ? '-20% 0px -80% 0px' : '-50% 0px -50% 0px',
             threshold: 0
         };
 
