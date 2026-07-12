@@ -437,6 +437,8 @@ body.light-mode .about-nav {
     flex-direction: column;
     gap: 1.5rem;
     margin-top: 2rem;
+    position: relative;
+    z-index: 1;
 }
 
 .credo-item {
@@ -464,14 +466,16 @@ body.light-mode .about-nav {
 
 .credo-stamp {
     position: absolute;
-    bottom: 2rem;
-    right: 5%;
-    width: 250px;
+    bottom: -10rem;
+    right: -25rem;
+    width: 500px;
+    /* Doubled for desktop */
     height: auto;
     transform: rotate(15deg);
     opacity: 0.9;
     pointer-events: none;
-    z-index: 5;
+    z-index: 0;
+    /* Behind text */
     filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
 
@@ -793,12 +797,14 @@ input[type="range"]#volume-fader::-moz-range-thumb {
 }
 
 /* Default Right Slide & explicit .slide-right */
-.video-wrapper, .video-wrapper.slide-right {
+.video-wrapper,
+.video-wrapper.slide-right {
     top: 50%;
     right: 0;
     transform: translateY(-50%);
 }
-.grid-item:hover .video-wrapper:not(.slide-left):not(.slide-down), 
+
+.grid-item:hover .video-wrapper:not(.slide-left):not(.slide-down),
 .grid-item:hover .video-wrapper.slide-right {
     transform: translate(100%, -50%);
 }
@@ -810,6 +816,7 @@ input[type="range"]#volume-fader::-moz-range-thumb {
     left: 0;
     transform: translateY(-50%);
 }
+
 .grid-item:hover .video-wrapper.slide-left {
     transform: translate(-100%, -50%);
 }
@@ -822,6 +829,7 @@ input[type="range"]#volume-fader::-moz-range-thumb {
     right: auto;
     transform: translate(-50%, 0);
 }
+
 .grid-item:hover .video-wrapper.slide-down {
     transform: translate(-50%, 100%);
 }
@@ -1303,5 +1311,167 @@ body.light-mode .pink-text p {
 
     .nm-project-slice .album-title {
         font-size: 2rem;
+    }
+}
+
+/* =========================================
+   COMPREHENSIVE MOBILE OPTIMIZATION
+   ========================================= */
+@media (max-width: 768px) {
+
+    /* TYPOGRAPHY & HEADER */
+    .intro-name {
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .album-title {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .header-name {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+
+    .header-roles {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
+    }
+
+    .header-roles .separator {
+        display: none;
+    }
+
+    /* GRIDS & CARDS */
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr !important;
+        gap: 2rem;
+    }
+
+    .release-card,
+    .release-card.layout-right {
+        flex-direction: column !important;
+        gap: 2rem;
+        padding: 2rem 1rem;
+    }
+
+    .image-container,
+    .content-container {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    /* PLAYER ANIMATIONS OVERRIDES FOR MOBILE */
+    /* Fade in OVER the artwork instead of sliding */
+    .player-wrapper {
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: none !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        clip-path: none !important;
+        z-index: 10 !important;
+        transition: opacity 0.3s ease !important;
+    }
+
+    .layout-left .image-container:hover .player-wrapper,
+    .layout-right .image-container:hover .player-wrapper,
+    .image-container:hover .player-wrapper,
+    .grid-item:hover .player-wrapper {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: none !important;
+    }
+
+    /* Reset default video-wrapper sliding directions to UP/DOWN on mobile */
+    .video-wrapper.slide-left,
+    .video-wrapper.slide-right,
+    .video-wrapper.slide-down,
+    .video-wrapper {
+        right: auto !important;
+        left: 50% !important;
+        bottom: 0 !important;
+        top: auto !important;
+        transform: translate(-50%, 0) !important;
+    }
+
+    .grid-item:hover .video-wrapper.slide-left,
+    .grid-item:hover .video-wrapper.slide-right,
+    .grid-item:hover .video-wrapper.slide-down,
+    .grid-item:hover .video-wrapper {
+        transform: translate(-50%, 100%) !important;
+    }
+
+    /* NEW MEDIA PROJECT LOGOS OVER TEXT */
+    .nm-project-slice {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding-top: 6rem !important;
+    }
+
+    .nm-logo-container,
+    .nm-project-slice.layout-right .nm-logo-container {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
+        margin-bottom: 2rem !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .nm-logo {
+        height: 20vh !important;
+        margin: 0 auto !important;
+    }
+
+    .nm-logo.padded-png {
+        transform: scale(2) !important;
+    }
+
+    .nm-logo-container.unicorner-logo-container {
+        height: auto !important;
+    }
+
+    /* CREDO STAMP BIGGER & RIGHT-DOWN */
+    .credo-stamp {
+        width: 300px !important;
+        /* Doubled for mobile */
+        bottom: -3rem !important;
+        right: -3rem !important;
+    }
+
+    /* ABOUT NAV & TABS */
+    .about-nav {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .about-tab-content {
+        padding: 2rem 1rem;
+    }
+
+    /* FOOTER */
+    .footer-links {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
     }
 }
