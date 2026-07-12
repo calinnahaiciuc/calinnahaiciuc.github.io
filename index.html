@@ -1258,13 +1258,16 @@
                     media.src = src;
 
                     if (isVideo) {
-                        media.autoplay = true;
                         media.loop = true;
                         media.muted = true;
                         media.playsInline = true;
+                        media.preload = 'metadata'; // prevent full load upfront
                     }
 
-                    if (index === 0) media.classList.add('active');
+                    if (index === 0) {
+                        media.classList.add('active');
+                        if (isVideo) media.play().catch(e => console.log('Play prevented:', e));
+                    }
                     container.appendChild(media);
                 });
 
@@ -1272,9 +1275,19 @@
                     let currentIndex = 0;
                     const mediaElements = container.querySelectorAll('img, video');
                     setInterval(() => {
-                        mediaElements[currentIndex].classList.remove('active');
+                        const prevMedia = mediaElements[currentIndex];
+                        prevMedia.classList.remove('active');
+                        if (prevMedia.tagName === 'VIDEO') {
+                            prevMedia.pause();
+                        }
+
                         currentIndex = (currentIndex + 1) % mediaElements.length;
-                        mediaElements[currentIndex].classList.add('active');
+                        
+                        const nextMedia = mediaElements[currentIndex];
+                        nextMedia.classList.add('active');
+                        if (nextMedia.tagName === 'VIDEO') {
+                            nextMedia.play().catch(e => console.log('Play prevented:', e));
+                        }
                     }, 3000); // 3 secunde pentru fiecare media
                 }
             }
