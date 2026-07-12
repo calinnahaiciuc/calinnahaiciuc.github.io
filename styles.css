@@ -1,0 +1,1222 @@
+:root {
+    --bg-color: #121212;
+    --surface-color: #1a1a1a;
+    --text-primary: #f0f0f0;
+    --text-secondary: #aaaaaa;
+
+    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+
+    --accent-orange: #ff9800;
+    --accent-green: #59b65e;
+    --accent-pink: #ff4081;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.8s ease, color 0.8s ease;
+}
+
+/* Efectul de dungi subtile preluat din design-ul PDF-ului */
+.bg-stripes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.2;
+    background: repeating-linear-gradient(transparent,
+            transparent 40px,
+            rgba(0, 0, 0, 0.08) 40px,
+            rgba(0, 0, 0, 0.08) 80px);
+    transition: opacity 0.8s ease;
+}
+
+/* Modificări specifice când background-ul devine deschis (Light Mode) */
+body.light-mode .description p {
+    color: #444444;
+}
+
+body.light-mode .divider {
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.15), transparent);
+}
+
+body.light-mode .image-placeholder {
+    border-color: #cccccc;
+    background: #e0e0e0;
+    color: #555555;
+}
+
+body.light-mode .bg-stripes {
+    opacity: 0.04;
+}
+
+.music-portfolio {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+}
+
+/* Typography Utilities */
+.serif {
+    font-family: var(--font-serif);
+}
+
+.pixel-font {
+    font-family: 'Courier New', Courier, monospace;
+    text-transform: lowercase;
+}
+
+/* --- SPA Header Navigation --- */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+    pointer-events: none;
+    /* Let clicks pass through empty spaces */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s ease, background 0.8s ease;
+}
+
+body.site-loaded .main-header {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+body.light-mode .main-header {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, transparent 100%);
+}
+
+.header-name,
+.header-roles {
+    pointer-events: auto;
+    /* Re-enable clicks */
+}
+
+/* --- Intro Cover --- */
+.intro-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    z-index: 200;
+    background-color: transparent;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.intro-cover.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* --- Image Wall --- */
+.image-wall {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-auto-rows: 150px;
+    grid-auto-flow: dense;
+    gap: 4px;
+}
+
+.image-wall img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    visibility: hidden;
+    filter: brightness(0.6) grayscale(0.2);
+}
+
+.image-wall img.revealed {
+    opacity: 1;
+    visibility: visible;
+}
+
+.image-wall img:hover {
+    filter: brightness(1) grayscale(0);
+}
+
+.span-1-1 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.span-2-2 {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.span-3-3 {
+    grid-column: span 3;
+    grid-row: span 3;
+}
+
+.span-4-4 {
+    grid-column: span 4;
+    grid-row: span 4;
+}
+
+.span-5-5 {
+    grid-column: span 5;
+    grid-row: span 5;
+}
+
+.span-2-1 {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.span-1-2 {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.span-3-2 {
+    grid-column: span 3;
+    grid-row: span 2;
+}
+
+.span-2-3 {
+    grid-column: span 2;
+    grid-row: span 3;
+}
+
+@media (max-width: 600px) {
+    .image-wall {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        grid-auto-rows: 100px;
+    }
+}
+
+.intro-name {
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: 6px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.intro-name:hover {
+    color: var(--accent-orange);
+    transform: scale(1.02);
+}
+
+.intro-roles {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1.2rem;
+    text-transform: lowercase;
+    letter-spacing: 2px;
+}
+
+.intro-link {
+    font-size: 1.2rem;
+}
+
+@media (max-width: 600px) {
+    .intro-name {
+        font-size: 2rem;
+        letter-spacing: 4px;
+        text-align: center;
+    }
+
+    .intro-roles {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}
+
+.header-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.header-name:hover {
+    color: var(--accent-orange);
+    transform: scale(1.02);
+}
+
+.header-roles {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+}
+
+.separator {
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+/* --- SPA View Sections --- */
+.view-section {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.view-section.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.portfolio-content {
+    padding-top: 4rem;
+    /* Add some space so header doesn't overlap content entirely */
+}
+
+/* --- About Section Tabs --- */
+.about-wrapper {
+    min-height: 80vh;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 4rem;
+}
+
+.about-tabs-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.about-nav {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+    transition: border-color 0.8s ease;
+}
+
+body.light-mode .about-nav {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.about-tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-family: var(--font-sans);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 0.5rem 1rem;
+    position: relative;
+}
+
+.about-tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background-color: var(--text-primary);
+    transition: width 0.3s ease, background-color 0.8s ease;
+}
+
+.about-tab-btn:hover {
+    color: var(--text-primary);
+}
+
+.about-tab-btn.active {
+    color: var(--text-primary);
+}
+
+.about-tab-btn.active::after {
+    width: 100%;
+}
+
+.about-tab-content {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 4rem 2rem;
+    border-radius: 8px;
+}
+
+.about-tab-content.active {
+    opacity: 1;
+}
+
+#bio-tab::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("imagini/~general/background.webp");
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    opacity: 0.75;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.about-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    transition: color 0.8s ease;
+}
+
+/* --- CREDO STYLES --- */
+.credo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.credo-item {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #aaaaaa;
+    position: relative;
+    padding-left: 1.5rem;
+    border-left: 3px solid transparent;
+    transition: all 1.2s ease;
+}
+
+.credo-item:hover {
+    padding-left: 2rem;
+    transition: all 0.1s ease;
+}
+
+#credo-title span {
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+input[type="range"]#volume-fader {
+    -webkit-appearance: none;
+    width: 250px;
+    height: 4px;
+    background: #444;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    margin-left: 2rem;
+}
+
+input[type="range"]#volume-fader::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--fader-color, #aaaaaa);
+    box-shadow: 0 0 10px var(--fader-color, transparent);
+    cursor: pointer;
+    transition: background 0.1s, box-shadow 0.1s;
+}
+
+input[type="range"]#volume-fader::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--fader-color, #aaaaaa);
+    box-shadow: 0 0 10px var(--fader-color, transparent);
+    cursor: pointer;
+    border: none;
+    transition: background 0.1s, box-shadow 0.1s;
+}
+
+/* Color 1: Neon Green */
+.credo-item[data-color-idx="1"]:hover {
+    color: #39FF14;
+    border-left-color: #39FF14;
+    background: linear-gradient(90deg, rgba(57, 255, 20, 0.08) 0%, transparent 100%);
+}
+
+/* Color 2: Cyan */
+.credo-item[data-color-idx="2"]:hover {
+    color: #00FFFF;
+    border-left-color: #00FFFF;
+    background: linear-gradient(90deg, rgba(0, 255, 255, 0.08) 0%, transparent 100%);
+}
+
+/* Color 3: Magenta */
+.credo-item[data-color-idx="3"]:hover {
+    color: #FF00FF;
+    border-left-color: #FF00FF;
+    background: linear-gradient(90deg, rgba(255, 0, 255, 0.08) 0%, transparent 100%);
+}
+
+/* Color 4: Orange */
+.credo-item[data-color-idx="4"]:hover {
+    color: #FFA000;
+    border-left-color: #FFA000;
+    background: linear-gradient(90deg, rgba(255, 160, 0, 0.08) 0%, transparent 100%);
+}
+
+/* Color 5: Yellow */
+.credo-item[data-color-idx="5"]:hover {
+    color: #FFFF00;
+    border-left-color: #FFFF00;
+    background: linear-gradient(90deg, rgba(255, 255, 0, 0.08) 0%, transparent 100%);
+}
+
+/* Color 6: Electric Purple */
+.credo-item[data-color-idx="6"]:hover {
+    color: #B200FF;
+    border-left-color: #B200FF;
+    background: linear-gradient(90deg, rgba(178, 0, 255, 0.08) 0%, transparent 100%);
+}
+
+/* Original Header */
+.portfolio-header {
+    text-align: center;
+    margin-bottom: 8rem;
+    /* padding adăugat pentru a da timp observer-ului să schimbe culoarea sus */
+    padding-top: 4rem;
+}
+
+.portfolio-header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin-bottom: 1rem;
+}
+
+.portfolio-header .subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.8s ease;
+}
+
+/* Common Layout */
+.divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    margin: 6rem 0;
+    transition: background 0.8s ease;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    letter-spacing: 6px;
+    margin-bottom: 5rem;
+    font-weight: 400;
+}
+
+/* Release Cards */
+.releases-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+}
+
+.release-card {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+}
+
+.release-card.layout-right {
+    flex-direction: row-reverse;
+}
+
+.image-container {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+.content-container {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.text-right-desktop {
+    text-align: right;
+}
+
+/* Image Placeholders and Cover Images */
+.image-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--surface-color);
+    border: 1px dashed #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.8s ease, background 0.8s ease;
+}
+
+.image-placeholder:hover {
+    transform: translateY(-5px);
+    border-color: #666;
+}
+
+.image-placeholder.square {
+    aspect-ratio: 1/1;
+}
+
+.image-placeholder.tall {
+    aspect-ratio: 3/4;
+}
+
+.cover-image {
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    display: block;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.cover-image:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.cover-image.square {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.cover-image.tall {
+    aspect-ratio: 3/4;
+    object-fit: cover;
+}
+
+/* Typography within cards */
+.album-title {
+    font-size: 2rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Hover Player Animations */
+.image-container,
+.grid-item {
+    position: relative;
+    z-index: 10;
+}
+
+.cover-link {
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+
+.player-wrapper {
+    position: absolute;
+    z-index: 1;
+    /* slides from behind */
+    background: rgba(17, 17, 17, 0.5);
+    /* 50% opacity background */
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    /* Delay on unhover */
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 2s, clip-path 0.8s cubic-bezier(0.25, 1, 0.5, 1) 2s;
+    clip-path: inset(0 0 0 0);
+    /* Default state no crop */
+}
+
+.image-container:hover .player-wrapper,
+.grid-item:hover .player-wrapper {
+    /* No delay on hover */
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0s, clip-path 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0s;
+}
+
+.player-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Albums (Side sliding) */
+.releases-list .player-wrapper {
+    top: 0;
+    margin-top: 0;
+    height: 100%;
+    /* Fixăm lățimea la 380px pentru a asigura că Bandcamp încarcă mereu UI-ul complet (tracklist-ul) */
+    width: 380px;
+    z-index: 1;
+    /* slides from behind */
+}
+
+.layout-left .player-wrapper {
+    left: 0;
+}
+
+.layout-left .image-container:hover .player-wrapper {
+    /* Glisează spre stânga maxim lățimea sa, dar OPREȘTE-TE la 1rem de marginea ecranului */
+    transform: translateX(max(-100%, min(-1rem, calc(550px - 50vw - 1rem))));
+}
+
+.layout-right .player-wrapper {
+    right: 0;
+}
+
+.layout-right .image-container:hover .player-wrapper {
+    /* Glisează complet la dreapta pentru a expune stânga, și taie (crop) fizic partea dreaptă ca să lase fix același spațiu (1rem) */
+    transform: translateX(100%);
+    clip-path: inset(0 max(0px, calc(396px - max(2rem, 50vw - 518px))) 0 0);
+}
+
+/* Singles / Compilations (Slide Up) */
+.grid-item .player-wrapper {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 350px;
+    /* Default for Compilations */
+    z-index: 1;
+}
+
+.singles .grid-item .player-wrapper {
+    height: 120px;
+    /* Overwrite for Singles */
+}
+
+.grid-item:hover .player-wrapper {
+    transform: translateY(-100%);
+}
+
+.video-wrapper {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 1;
+    background: #111;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.25rem;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0s;
+}
+
+.grid-item:hover .video-wrapper {
+    transform: translate(100%, -50%);
+}
+
+.video-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+}
+
+.video-link:hover {
+    color: var(--accent-orange);
+}
+
+.artist-name {
+    font-size: 1.2rem;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+}
+
+.small-title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    transition: color 0.8s ease;
+}
+
+.description p,
+.description ul,
+.description li {
+    font-size: 0.95rem;
+    color: #cccccc;
+    font-weight: 300;
+    transition: color 0.8s ease;
+}
+
+.description strong {
+    color: #f0f0f0;
+    font-weight: 500;
+}
+
+.description p {
+    margin-bottom: 1rem;
+}
+
+.release-date {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+    transition: color 0.8s ease;
+}
+
+/* Special PDF specific styling */
+.orange-glow {
+    color: var(--accent-orange);
+}
+
+.green-glow {
+    color: var(--accent-green);
+}
+
+.pink-glow {
+    color: var(--accent-pink);
+}
+
+.pink-text p,
+body.light-mode .pink-text p {
+    color: var(--accent-pink);
+}
+
+/* Grid Layouts (Singles & Compilations) */
+.sub-section {
+    margin-bottom: 5rem;
+}
+
+.sub-title {
+    text-align: center;
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    margin-bottom: 3rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    transition: color 0.8s ease;
+}
+
+.grid-container {
+    display: grid;
+    gap: 3rem;
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.track-title {
+    font-size: 1rem;
+    letter-spacing: 3px;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1300px) {
+    .releases-list .player-wrapper {
+        top: 0;
+        bottom: auto;
+        left: 50%;
+        margin-left: -100px;
+        /* Half of 200px width */
+        margin-top: 0;
+    }
+
+    .layout-left .player-wrapper,
+    .layout-right .player-wrapper {
+        left: 50%;
+        right: auto;
+    }
+
+    .layout-left .image-container:hover .player-wrapper,
+    .layout-right .image-container:hover .player-wrapper {
+        transform: translateY(-100%);
+    }
+}
+
+@media (max-width: 900px) {
+
+    .release-card,
+    .release-card.layout-right {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .image-container {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .text-right-desktop {
+        text-align: left;
+    }
+
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .music-portfolio {
+        padding: 4rem 1rem;
+    }
+
+    .album-title {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- NEW MEDIA PROJECTS --- */
+.nm-projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 4rem;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    position: relative;
+}
+
+.nm-projects-list::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(to bottom, #121212 0%, transparent 100%);
+    z-index: 50;
+    pointer-events: none;
+}
+
+.nm-project-slice {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 4rem 2rem;
+    border-radius: 0;
+    cursor: pointer;
+    /* Click to expand */
+    transition: background-color 0.8s ease;
+}
+
+.nm-project-slice::after {
+    content: "Click pentru a extinde detaliile";
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    opacity: 0.4;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.nm-project-slice.expanded::after {
+    content: "Click pentru a restrânge detaliile";
+}
+
+.expandable-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.8s ease, opacity 0.6s ease;
+}
+
+.nm-project-slice.expanded .expandable-content {
+    max-height: 2500px;
+    opacity: 1;
+    margin-top: 1.5rem;
+}
+
+.nm-project-slice.layout-right {
+    /* No flex-direction change needed if logos are absolute */
+}
+
+.nm-logo-container {
+    position: absolute;
+    top: 50%;
+    left: 6vw;
+    transform: translateY(-50%);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nm-logo-link {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.nm-logo-link::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 100;
+}
+
+.nm-logo-link:hover::after {
+    opacity: 1;
+}
+
+.nm-project-slice.layout-right .nm-logo-container {
+    left: auto;
+    right: 6vw;
+}
+
+.nm-logo {
+    height: 33.33vh;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
+    transition: transform 0.3s ease;
+}
+
+.nm-logo:hover {
+    transform: scale(1.05);
+}
+
+.nm-logo.padded-png {
+    /* Scale visually without expanding the flex bounding box to compensate for transparent padding */
+    transform: scale(2.4);
+    /* Reduced by 1/3 from 3.6 */
+}
+
+.nm-logo.padded-png:hover {
+    transform: scale(2.52);
+}
+
+.nm-logo.aligned-logo {
+    margin-left: -5vw;
+}
+
+.nm-logo-container.unicorner-logo-container {
+    height: 100%;
+    top: 0;
+    transform: none;
+}
+
+.nm-logo.unicorner-logo {
+    height: 90%;
+    width: auto;
+    max-width: none;
+    transform: none;
+    clip-path: none;
+}
+
+.nm-logo.unicorner-logo:hover {
+    transform: scale(1.05);
+}
+
+.nm-logo.resorunes-logo {
+    transform: scale(1.4);
+}
+
+.nm-logo.resorunes-logo:hover {
+    transform: scale(1.47);
+}
+
+.nm-logo.placeholder {
+    height: 33.33vh;
+    width: 33.33vh;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    text-align: center;
+    padding: 2rem;
+}
+
+.slideshow-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: #1a1a1a;
+}
+
+.slideshow-bg img,
+.slideshow-bg video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    will-change: opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.slideshow-bg img.active,
+.slideshow-bg video.active {
+    opacity: 0.65;
+}
+
+/* Ajustare poziție pentru imaginea 6 din Unicorner */
+.slideshow-bg img[src$="6.webp"] {
+    object-position: 85% center !important;
+}
+
+.nm-project-slice .content-container.center-aligned {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    background: rgba(18, 18, 18, 0.25);
+    padding: 3rem;
+    border-radius: 4px;
+    backdrop-filter: blur(7.5px);
+    color: #f0f0f0;
+    box-shadow: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 50px, black calc(100% - 50px), transparent 100%), linear-gradient(to right, transparent 0px, black 50px, black calc(100% - 50px), transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to bottom, transparent 0px, black 50px, black calc(100% - 50px), transparent 100%), linear-gradient(to right, transparent 0px, black 50px, black calc(100% - 50px), transparent 100%);
+    mask-composite: intersect;
+}
+
+.nm-project-slice .album-title {
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+}
+
+.nm-project-slice .description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .nm-project-slice {
+        min-height: 50vh;
+        padding: 2rem 1rem;
+    }
+
+    .nm-project-slice .content-container.center-aligned {
+        padding: 2rem 1rem;
+    }
+
+    .nm-project-slice .album-title {
+        font-size: 2rem;
+    }
+}

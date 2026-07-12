@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producții Muzicale - Marcus Aburelius</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Fundal fix pentru textură (dungi subtile, precum în PDF) -->
+    <div class="bg-stripes"></div>
+
+    <nav class="main-header">
+        <div class="header-name" onclick="toggleAboutOrSplash()">CĂLIN NAHAICIUC</div>
+        <div class="header-roles">
+            <a href="#" onclick="switchSection('new-media-section'); return false;" class="nav-link"
+                id="nav-new-media">artist new media</a>
+            <span class="separator">/</span>
+            <a href="#" onclick="switchSection('music-section'); return false;" class="nav-link"
+                id="nav-music">producător muzică electronică</a>
+        </div>
+    </nav>
+
+    <!-- INTRO COVER -->
+    <div id="intro-cover" class="intro-cover">
+        <div class="intro-name" onclick="switchSection('about-section')">CĂLIN NAHAICIUC</div>
+        <div class="intro-roles">
+            <a href="#" onclick="switchSection('new-media-section'); return false;" class="nav-link intro-link">artist
+                new media</a>
+            <span class="separator">/</span>
+            <a href="#" onclick="switchSection('music-section'); return false;" class="nav-link intro-link">producător
+                muzică electronică</a>
+        </div>
+    </div>
+
+    <main class="portfolio-content">
+        <!-- MUSIC SECTION -->
+        <div id="music-section" class="view-section" style="display: none;">
+            <div class="music-portfolio">
+                <header class="portfolio-header dynamic-section" data-bg="#121212" data-text="#f0f0f0">
+                    <h1>ALBUME MUZICALE</h1>
+                    <p class="subtitle">drept Marcus Aburelius</p>
+                </header>
+
+                <!-- ALBUME PRINCIPALE -->
+                <section class="releases-list">
+
+                    <!-- NATURA SELECTED WORKS -->
+                    <article class="release-card layout-right dynamic-section" data-bg="#1B3623" data-text="#ffffff">
+                        <div class="image-container">
+                            <div class="player-wrapper">
+                                <iframe
+                                    src="https://bandcamp.com/EmbeddedPlayer/album=2719523257/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                    seamless></iframe>
+                            </div>
+                            <a href="https://mindfares.bandcamp.com/album/natura-selected-works-i" target="_blank"
+                                class="cover-link">
+                                <img class="cover-image square" src="imagini/coperți albume/natura cover.webp"
+                                    alt="Natura Selected Works">
+                            </a>
+                        </div>
+                        <div class="content-container">
+                            <h2 class="album-title serif"
+                                style="color: color-mix(in srgb, var(--text-secondary) 67%, var(--text-primary) 33%);">
+                                natura selected works<br>(mndf001)</h2>
+                            <div class="description">
+                                <p>Natura este un EP cu influențe de ambient, trip hop și post rock și este primul meu
+                                    album lansat pe vinyl, precum și lansarea inaugarală a casei de discuri clujene,
+                                    Mindfares.</p>
+                                <p>Natura este un album pe care l-am produs cândva între 2020-2021 în timpul unui music
+                                    retreat în satul meu natal, când am schimbat cluburile (Collectiva Gazette - spațiu
+                                    și comunitatea ce-mi oferise sprijinul și cadrul începutului activității mele
+                                    artistice, se închisese) cu liniștea vibrantă din micul meu sat verde.</p>
+                                <p>Relația mea cu muzica s-a adâncit, fusese o perioadă de studiu diligent, am trecut
+                                    prin marile opere ale muzicii electronice (cu un accent pe lumile pe atunci noi
+                                    pentru mine ale muzicii ambient și dub techno), am început să învăț să cânt la clape
+                                    și tobe, am trecut prin influenta serie de articole de sound design Synth Secrets de
+                                    la Sound and Sound, mi-am scos chitara din husă și am devenit fluent în Ableton
+                                    Live.</p>
+                                <p>Va fi urmat de Natura - Selected Works II.</p>
+                            </div>
+                            <p class="release-date">DATA LANSĂRII : 10 Decembrie 2025</p>
+                        </div>
+                    </article>
+                    <!-- VLN ETUDES -->
+                    <article class="release-card layout-left dynamic-section" data-bg="#DFDCE0" data-text="#1a1a1a">
+                        <div class="image-container">
+                            <div class="player-wrapper">
+                                <iframe
+                                    src="https://bandcamp.com/EmbeddedPlayer/album=931070376/size=large/bgcol=121212/linkcol=ffffff/artwork=none/transparent=true/"
+                                    seamless></iframe>
+                            </div>
+                            <a href="https://marcusaburelius.bandcamp.com/album/vln-tudes" target="_blank"
+                                class="cover-link">
+                                <img class="cover-image square" src="imagini/coperți albume/vln etudes cover.webp"
+                                    alt="VLN Études">
+                            </a>
+                        </div>
+                        <div class="content-container">
+                            <h2 class="album-title serif">VLN ÉTUDES</h2>
+                            <div class="description">
+                                <p>Acest album este o colecție de zece studii de compoziție electroacustică realizate pe
+                                    parcursul unui semestru de studiu la Academia Lituaniană de Muzică și Teatru din
+                                    Vilnius.</p>
+                                <p>În aceste compoziții se regăsesc explorări de musique concrète, lucrări corale
+                                    experimentale, breakbeat-uri violent deconstruite, gesturi de muzică clasică
+                                    contemporană, drone microtonale inspirate de Éliane Radigue, dar și tehnici
+                                    compoziționale din secolul al XV-lea reinterpretate prin sinteză de tip kosmische.
+                                    Totodată, albumul include și o incursiune în colaje de microsunete hiperrealiste, cu
+                                    energie fragmentată, inspirate din estetica jocurilor video.</p>
+                                <p>În ansamblu, este un document al unei perioade decisive în dezvoltarea mea artistică
+                                    — o instantanee brută și exploratorie a unui proces de învățare, experimentare și
+                                    transformare a meșteșugului meu componistic.</p>
+                            </div>
+                            <p class="release-date">DATA LANSĂRII : 19 Octombrie 2025</p>
+                        </div>
+                    </article>
+
+                    <!-- THE "BEFORE" ALBUM -->
+                    <article class="release-card layout-right dynamic-section" data-bg="#161618" data-text="#ffffff">
+                        <div class="image-container">
+                            <div class="player-wrapper">
+                                <iframe
+                                    src="https://bandcamp.com/EmbeddedPlayer/album=3768041503/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                    seamless></iframe>
+                            </div>
+                            <a href="https://marcusaburelius.bandcamp.com/album/before" target="_blank"
+                                class="cover-link">
+                                <img class="cover-image" src="imagini/coperți albume/before cover.webp"
+                                    alt="The Before Album">
+                            </a>
+                        </div>
+                        <div class="content-container text-right-desktop">
+                            <h2 class="album-title serif">THE "BEFORE" ALBUM</h2>
+                            <div class="description">
+                                <p><em>Before</em> este un album concept personal ce combină distorsiuni jucăușe ale
+                                    unor tropi de muzică house cu o abordare cinematică asupra sound design-ului,
+                                    utilizate drept mijloace de a construi un arc emoțional de tip jurnal. Scăldat în
+                                    romantismul plin de căldură ușor nostalgică al trilogiei filmelor "Before" a lui
+                                    Richard Linklater, este un album ghidat de tehnici inspirate din structurile
+                                    scenariilor de film.</p>
+                            </div>
+                            <p class="release-date">release date : 14.02.2021</p>
+                        </div>
+                    </article>
+
+                    <!-- HITURI ANIVERSARE 2018 -->
+                    <article class="release-card layout-left dynamic-section" data-bg="#209EFE" data-text="#ffffff">
+                        <div class="image-container">
+                            <div class="player-wrapper">
+                                <iframe
+                                    src="https://bandcamp.com/EmbeddedPlayer/album=1934380347/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                    seamless></iframe>
+                            </div>
+                            <a href="https://marcusaburelius.bandcamp.com/album/hit-aniversare-2018" target="_blank"
+                                class="cover-link">
+                                <img class="cover-image" src="imagini/coperți albume/hit aniversare 2018 cover.webp"
+                                    alt="Hit Aniversare 2018">
+                            </a>
+                        </div>
+                        <div class="content-container">
+                            <h3 class="artist-name" style="color: #43F218;">marco de la abureni</h3>
+                            <h2 class="album-title custom-font" style="color: #FFA000;">HIT ANIVERSARE 2018</h2>
+                            <div class="description">
+                                <p style="color: #f0f0f0;">Acest EP reprezintă o explorare a unuia dintre cele mai
+                                    vibrante fenomene socio-muzicale din România anilor 2000 : lumea manelelor. Prin
+                                    prisma tehnicilor de producție din muzica rap, materialul deconstruiește și
+                                    reasamblează prin sampling elementele iconice ale întregului univers manelistic
+                                    (manelar ?). Rezultatul este o capsulă sonoră, o incursiune critică, dar plină de
+                                    afecțiune, în imaginarul și estetica unui stil ce a definit o întreagă decadă.</p>
+                            </div>
+                            <p class="release-date" style="color: #f0f0f0;">DATA LANSĂRII: 24 NOIEMBRIE 2020</p>
+                        </div>
+                    </article>
+
+                    <!-- O ZI DE TOAMNA IN CLUJ -->
+                    <article class="release-card layout-right dynamic-section" data-bg="#9E99A3" data-text="#1a1a1a">
+                        <div class="image-container">
+                            <div class="player-wrapper">
+                                <iframe
+                                    src="https://bandcamp.com/EmbeddedPlayer/album=35998108/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                    seamless></iframe>
+                            </div>
+                            <a href="https://marcusaburelius.bandcamp.com/album/o-zi-de-toamn-n-cluj" target="_blank"
+                                class="cover-link">
+                                <img class="cover-image" src="imagini/coperți albume/o zi de toamnă în cluj cover.webp"
+                                    alt="O Zi de Toamnă în Cluj">
+                            </a>
+                        </div>
+                        <div class="content-container text-right-desktop">
+                            <h2 class="album-title serif">O ZI DE TOAMNĂ ÎN CLUJ</h2>
+                            <div class="description">
+                                <p>Acesta este primul meu album lansat drept Marcus Aburelius. Este un album conceptul
+                                    "soft", al cărui idee fusese să-mi captez o zi din viața mea de atunci în format
+                                    muzical, o provocare pe care eu drept proaspăt absolvent Filmologie nu o putusem
+                                    rezista.</p>
+                            </div>
+                            <p class="release-date">RELEASE DATE : NOVEMBER 24, 2018</p>
+                        </div>
+                    </article>
+                </section>
+
+                <div class="divider"></div>
+
+                <!-- SINGLE-URI -->
+                <section class="grid-section singles dynamic-section" data-bg="#F0F0F0" data-text="#1a1a1a">
+                    <h2 class="section-title tracking-in">SINGLE-URI</h2>
+
+                    <div class="sub-section">
+                        <h3 class="sub-title serif">DREPT ABURELIUS</h3>
+                        <div class="grid-container grid-3">
+                            <div class="grid-item">
+                                <div class="player-wrapper">
+                                    <iframe
+                                        src="https://bandcamp.com/EmbeddedPlayer/track=1597332824/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                        seamless></iframe>
+                                </div>
+                                <div class="video-wrapper">
+                                    <a href="https://www.youtube.com/watch?v=H7JJowQVgDA" target="_blank"
+                                        class="video-link">
+                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path
+                                                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
+                                            </path>
+                                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                                        </svg>
+                                        <span>video</span>
+                                    </a>
+                                </div>
+                                <a href="https://marcusaburelius.bandcamp.com/track/comefomi" target="_blank"
+                                    class="cover-link">
+                                    <img class="cover-image square" src="imagini/coperți albume/comefomi cover.webp"
+                                        alt="COMEFOMI">
+                                </a>
+                                <h4 class="track-title serif">COMEFOMI (2023)</h4>
+                            </div>
+                            <div class="grid-item">
+                                <div class="player-wrapper">
+                                    <iframe
+                                        src="https://bandcamp.com/EmbeddedPlayer/track=2599546364/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                        seamless></iframe>
+                                </div>
+                                <a href="https://marcusaburelius.bandcamp.com/track/golanee" target="_blank"
+                                    class="cover-link">
+                                    <img class="cover-image square" src="imagini/coperți albume/glnee cover.webp"
+                                        alt="GLNEE">
+                                </a>
+                                <h4 class="track-title serif">GLNEE (2023)</h4>
+                            </div>
+                            <div class="grid-item">
+                                <div class="player-wrapper">
+                                    <iframe
+                                        src="https://bandcamp.com/EmbeddedPlayer/track=449086352/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                        seamless></iframe>
+                                </div>
+                                <div class="video-wrapper">
+                                    <a href="https://www.youtube.com/watch?v=REE1naOERtU" target="_blank"
+                                        class="video-link">
+                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path
+                                                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
+                                            </path>
+                                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                                        </svg>
+                                        <span>video</span>
+                                    </a>
+                                </div>
+                                <a href="https://marcusaburelius.bandcamp.com/track/op6autmn" target="_blank"
+                                    class="cover-link">
+                                    <img class="cover-image square" src="imagini/coperți albume/op6autumn cover.webp"
+                                        alt="OP6AUTMN">
+                                </a>
+                                <h4 class="track-title serif">OP6AUTMN (2023)</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sub-section">
+                        <h3 class="sub-title serif">DREPT CLABURELIUS</h3>
+                        <div class="grid-container grid-3">
+                            <div class="grid-item">
+                                <div class="player-wrapper">
+                                    <iframe
+                                        src="https://bandcamp.com/EmbeddedPlayer/track=3229956284/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                        seamless></iframe>
+                                </div>
+                                <a href="https://marcusaburelius.bandcamp.com/track/bn-hai" target="_blank"
+                                    class="cover-link">
+                                    <img class="cover-image square" src="imagini/coperți albume/cover bn hai.webp"
+                                        alt="BN HAI">
+                                </a>
+                                <h4 class="track-title serif">BN HAI (2024)</h4>
+                            </div>
+                            <div class="grid-item">
+                                <div class="player-wrapper">
+                                    <iframe
+                                        src="https://bandcamp.com/EmbeddedPlayer/track=2827306749/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                        seamless></iframe>
+                                </div>
+                                <a href="https://marcusaburelius.bandcamp.com/track/gpeeler" target="_blank"
+                                    class="cover-link">
+                                    <img class="cover-image square" src="imagini/coperți albume/gpeeler cover.webp"
+                                        alt="GPEELER">
+                                </a>
+                                <h4 class="track-title serif">GPEELER (2024)</h4>
+                            </div>
+                            <div class="grid-item">
+                                <div class="player-wrapper">
+                                    <iframe
+                                        src="https://bandcamp.com/EmbeddedPlayer/track=2347643282/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                        seamless></iframe>
+                                </div>
+                                <a href="https://marcusaburelius.bandcamp.com/track/rupe" target="_blank"
+                                    class="cover-link">
+                                    <img class="cover-image square" src="imagini/coperți albume/rupe cover.webp"
+                                        alt="RUPE">
+                                </a>
+                                <h4 class="track-title serif">RUPE (2024)</h4>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="divider"></div>
+
+                <!-- ALTE LANSARI -->
+                <section class="releases-list dynamic-section" data-bg="#FFFFFF" data-text="#1a1a1a">
+                    <h2 class="section-title tracking-in">ALTE LANSĂRI</h2>
+
+                    <article class="release-card layout-left">
+                        <div class="image-container">
+                            <div class="player-wrapper">
+                                <iframe
+                                    src="https://bandcamp.com/EmbeddedPlayer/album=1215550675/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                    seamless></iframe>
+                            </div>
+                            <a href="https://facultadepolitech.bandcamp.com/album/n-sesiune-cu-rodion" target="_blank"
+                                class="cover-link">
+                                <img class="cover-image square"
+                                    src="imagini/coperți albume/sesiune cu rodion cover.webp"
+                                    alt="În Sesiune cu Rodion">
+                            </a>
+                        </div>
+                        <div class="content-container">
+                            <h3 class="small-title serif">facultatea de politechnică</h3>
+                            <h2 class="album-title serif">ÎN SESIUNE CU RODION</h2>
+                            <div class="description">
+                                <p>Un EP experimental lansat cu trupa pe care o aveam pe atunci formată din mine, Robert
+                                    Keresztesy și Alexandra Mocan - în colaborare cu și rezultatul prieteniei noastre cu
+                                    Rodion - Ladislau Rosca.</p>
+                            </div>
+                            <p class="release-date">DATĂ LANSARE : DECEMBRIE 14, 2018</p>
+                        </div>
+                    </article>
+
+                    <article class="release-card layout-right">
+                        <div class="image-container">
+                            <div class="player-wrapper">
+                                <iframe width="100%" height="350" scrolling="no" frameborder="no"
+                                    allow="autoplay; encrypted-media"
+                                    src="https://w.soundcloud.com/player/?visual=false&url=https%3A%2F%2Fapi.soundcloud.com%2Fplaylists%2F1898018171&show_artwork=false&color=121212&auto_play=false&hide_related=true"></iframe>
+                            </div>
+                            <a href="https://soundcloud.com/muzicon-966519934/sets/muzicon-creative-camp-2"
+                                target="_blank" class="cover-link">
+                                <img class="cover-image square" src="imagini/coperți albume/muzicon cover.webp"
+                                    alt="Muzicon '24 Summercamp">
+                            </a>
+                        </div>
+                        <div class="content-container text-right-desktop">
+                            <h2 class="album-title pixel-font pink-glow">muzicon '24 summercamp<br>felowship sess #2
+                            </h2>
+                            <div class="description pink-text">
+                                <p>Rezultatul unei tabere de muzică de 10 zile din Buzad, Timișoara organizată de
+                                    Muzicon în cadrul căreia 4 echipe compuse din diverși artiști selectați în urma unui
+                                    concurs au compus muzică împreună.</p>
+                                <p>Eu am făcut parte din echipa Patina Timpului, ce a fost condusă de Uțu Pascu și am
+                                    avut drept membri de echipă pe Andrei Bobiș și pe Flavius Retea.</p>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="releases-list dynamic-section" data-bg="#5A635C" data-text="#ffffff"
+                    style="margin-top: 8rem;">
+                    <!-- P1 - FILMUL UNEI ZILE PE PĂMÂNT -->
+                    <article class="release-card layout-left">
+                        <div class="image-container">
+                            <div class="player-wrapper">
+                                <iframe
+                                    src="https://bandcamp.com/EmbeddedPlayer/album=3590590740/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                    seamless></iframe>
+                            </div>
+                            <a href="https://filmuluneizilepepmnt1.bandcamp.com/album/p1" target="_blank"
+                                class="cover-link">
+                                <img class="cover-image square" src="imagini/coperți albume/filmuluneizile.webp"
+                                    alt="P1">
+                            </a>
+                        </div>
+                        <div class="content-container text-left-desktop">
+                            <h3 class="artist-name green-glow"
+                                style="color:#d4e0d4;text-shadow:0 0 10px rgba(212,224,212,0.3);">filmul unei zile pe
+                                pământ</h3>
+                            <h2 class="album-title serif">P1</h2>
+                            <div class="description">
+                                <p>Primul EP pe care l-am lansat în traiectoria mea de muzician, 4 compoziții post-rock
+                                    și de pe atunci deja puternic influențate de muzică electronică, lansate sub one man
+                                    band-ul Filmul unei Zile pe Pământ.</p>
+                            </div>
+                            <p class="release-date">DATA LANSĂRII: 17 APRILIE 2016</p>
+                        </div>
+                    </article>
+                </section>
+
+                <div class="divider"></div>
+
+                <!-- APARITII PE COMPILATII -->
+                <section class="grid-section compilations dynamic-section" data-bg="#FFFFFF" data-text="#1a1a1a">
+                    <h2 class="section-title serif">APARIȚII PE COMPILAȚII</h2>
+                    <div class="grid-container grid-3">
+                        <div class="grid-item">
+                            <div class="player-wrapper">
+                                <iframe
+                                    src="https://bandcamp.com/EmbeddedPlayer/album=373405527/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                    seamless></iframe>
+                            </div>
+                            <a href="https://psihodrom.bandcamp.com/album/v" target="_blank" class="cover-link">
+                                <img class="cover-image square" src="imagini/coperți albume/psihodrom 5 cover.webp"
+                                    alt="Psihodrom V">
+                            </a>
+                        </div>
+                        <div class="grid-item">
+                            <div class="player-wrapper">
+                                <iframe
+                                    src="https://bandcamp.com/EmbeddedPlayer/album=2500815351/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                    seamless></iframe>
+                            </div>
+                            <a href="https://psihodrom.bandcamp.com/album/ase" target="_blank" class="cover-link">
+                                <img class="cover-image square" src="imagini/coperți albume/psihodrom 6 cover.webp"
+                                    alt="Psihodrom ȘASE">
+                            </a>
+                        </div>
+                        <div class="grid-item">
+                            <div class="player-wrapper">
+                                <iframe
+                                    src="https://bandcamp.com/EmbeddedPlayer/album=3521254774/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/"
+                                    seamless></iframe>
+                            </div>
+                            <a href="https://gazetofon.bandcamp.com/album/gazetofon-001" target="_blank"
+                                class="cover-link">
+                                <img class="cover-image square" src="imagini/coperți albume/gazetofon compilație 1.webp"
+                                    alt="Gazetofon">
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="divider"></div>
+
+                <!-- SOON TO BE RELEASED (Comentat pentru utilizare viitoare)
+    <section class="releases-list dynamic-section" data-bg="#9D9D9D" data-text="#1a1a1a">
+        <h2 class="section-title serif">SOON TO BE RELEASED</h2>
+        <article class="release-card layout-left">
+            <div class="image-container">
+                <div class="player-wrapper">
+                    <iframe src="https://bandcamp.com/EmbeddedPlayer/album=2719523257/size=large/bgcol=121212/linkcol=f0f0f0/artwork=none/transparent=true/" seamless></iframe>
+                </div>
+                <a href="https://mindfares.bandcamp.com/album/natura-selected-works-i" target="_blank" class="cover-link">
+                    <img class="cover-image square" src="imagini/coperți albume/natura cover.webp" alt="Natura Selected Works">
+                </a>
+            </div>
+            <div class="content-container">
+                <h2 class="album-title serif">aburelius - natura selected works<br>(mndf001)</h2>
+                <div class="description">
+                    <p>UN EP DE AMBIENT, TRIP HOP, POST ROCK CREAT ÎN PERIOADA UNUI RETREAT ARTISTIC ÎN NATURĂ ȘI PRIMA LANSARE A LABEL-ULUI CLUJEAN MINDFARES. VA FI LANSAT PE VINYL.</p>
+                </div>
+            </div>
+        </article>
+    </section>
+    -->
+            </div> <!-- end music-portfolio inner wrap -->
+        </div> <!-- end music-section -->
+
+        <!-- NEW MEDIA SECTION -->
+        <div id="new-media-section" class="view-section" style="display: none;">
+            <div class="music-portfolio">
+                <header class="portfolio-header dynamic-section" data-bg="#121212" data-text="#f0f0f0">
+                    <h1>NEW MEDIA ART</h1>
+                    <p class="subtitle">selecțiile esențiale</p>
+                </header>
+
+                <section class="nm-projects-list">
+                    <!-- Proiect 1: Unicorner -->
+                    <article class="nm-project-slice">
+                        <div class="slideshow-bg" id="bg-unicorner"></div>
+                        <div class="nm-logo-container unicorner-logo-container">
+                            <img class="nm-logo aligned-logo unicorner-logo"
+                                src="imagini/proiecte new media/4 unicorner/logoUnicorner.webp" alt="Logo Unicorner">
+                        </div>
+                        <div class="content-container center-aligned">
+                            <h2 class="album-title serif">unicorner</h2>
+                            <div class="description">
+                                <p><em>unicorner</em> este un proiect ce facilitează exprimarea artistică a DJ-ilor prin
+                                    intermediul mediului VJ-ing. Proiectul conectează software-ul pentru DJ-ing DJay Pro
+                                    cu TouchDesigner și extrage diverse informații din selecția muzicală pentru a crea
+                                    un visualizer customizat, nuanțat și audioreactiv ce oferă o serie de mijloace
+                                    intuitive unui DJ pentru a putea manipula expresiv vizualele generative.</p>
+                                <p>Proiectul a câștigat premiul "Best use of Touch Designer" la hackathon-ul Music
+                                    Hackspace din Lisabona din 2026.</p>
+                                <div class="expandable-content">
+                                    <p>Proiect creat de echipa :<br>
+                                        Călin - programarea graficei generative în TouchDesigner, interfațarea DJPro cu
+                                        TD, definirea manuală parametrilor de control<br>
+                                        Dan - modul ce permite utilizarea LLM-urilor în cadrul proiectului pentru a
+                                        genera parametrii de control într-un mod intuitiv<br>
+                                        Bernardo - identatea vizuală (cu Călin) + controller UX (cu Dan)<br>
+                                        Guille - extragerea semnalului audio<br>
+                                        Eugene - QA</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Proiect 2: Oracolul 2000 -->
+                    <article class="nm-project-slice">
+                        <div class="slideshow-bg" id="bg-oracolul"></div>
+                        <div class="nm-logo-container">
+                            <a href="https://oracolul2000.ro/" target="_blank" class="nm-logo-link"
+                                title="Vizitează oracolul2000.ro">
+                                <img class="nm-logo padded-png"
+                                    src="imagini/proiecte new media/2 oracolul 2000/logo oracolul românia.png"
+                                    alt="Logo Oracolul 2000">
+                            </a>
+                        </div>
+                        <div class="content-container center-aligned">
+                            <h2 class="album-title serif">oracolul 2000</h2>
+                            <div class="description">
+                                <p><em>oracolul2000</em> este un proiect multimedia cu și despre cultura pop a României
+                                    începutului anilor 2000. În contextul actual, marcat de o accelerare a globalizării
+                                    algoritmice și de o criză a imaginației culturale, proiectul propune un act de
+                                    arheologie digitală și nostalgie reflexivă. Obiectivul central este de a crea o
+                                    experiență imersivă care nu doar recreează, ci și re-contextualizează o perioadă
+                                    definită de o originalitate hibridă, aflată la intersecția dintre moștenirea
+                                    post-comunistă și aspirațiile occidentale.</p>
+                                <p>Platforma web, nucleul proiectului, simulează un mediu computerizat din acea eră (un
+                                    birou virtual și un desktop Windows XP), transformând utilizatorul din spectator
+                                    pasiv într-un explorator activ. Prin intermediul unor "aplicații" simulate – un
+                                    oracol digital, un player de muzică, o arhivă de artefacte – proiectul invită la o
+                                    reflecție critică asupra modului în care tehnologia ne-a modelat identitatea,
+                                    comunicarea și memoria colectivă, punând întrebări precum : există o nostalgie
+                                    analitică, care să nu să se piardă în trecut, dar care să îl mineze pentru a ne
+                                    actualiza atitudinea asupra prezentului? Ce anume de atunci merită sărbătorit și
+                                    păstrat ? Ce am pierdut, dar și ce am câștigat între timp?</p>
+                                <div class="expandable-content">
+                                    <p>Principalele a avut următoarele componente:</p>
+                                    <ul style="text-align: left; margin: 1rem 0 1rem 2rem; list-style-type: disc;">
+                                        <li><strong>website oracolul2000.ro</strong> (cu “proto-platforma” de social
+                                            media a caietului de oracol și o arhivă a canonului pop-cultural y2k („year
+                                            2000” – termen folosit pentru a descrie perioada începutului anilor 2000)
+                                            împachetată într-o interfață Windows XP.</li>
+                                        <li><strong>o lansare muzicală cu propria sa platformă</strong>: site-ul conține
+                                            un “walkman” skeumorfic ce conține muzica unei album muzical ce omagiază si
+                                            isi propune să traseze o legătură între muzica pop românească y2k si
+                                            numeroase tradiții globale de muzică de dans underground</li>
+                                        <li><strong>un show AV</strong> - rezultatul unei mini-rezidențe în cadrul
+                                            Căminulului Subcultural ce a avut loc pe 6 februarie 2026 (se lucrează
+                                            momentan la o versiune fixed media a show-ului)</li>
+                                        <li><strong>o colecție de 25 de casete unicat</strong> – înspre promovarea
+                                            evenimentului am creat o tombolă prin care am oferit câștigătorilor una din
+                                            cele 25 de casete cu materialul muzical înscripționat și cu un design unicat
+                                            și cu carcase customizate printate 3d .</li>
+                                    </ul>
+                                    <p>
+                                        project lead / concept / muzică / design / webdev : Călin Nahaiciuc<br>
+                                        profesor coordonator : Cristina Pop-Tiron<br>
+                                        live AV led lights : Cristian Dubineanschi<br>
+                                        live AV projections OPs : Marina Gheorghe, Norbert Dakograff<br>
+                                        casette sleeve 3d design and printing : Simon George<br>
+                                        comentarii text arhivă : Oana Mocanu<br>
+                                        artwork / design advisor : Alexandra Mocan<br>
+                                        back and forth idei man : Tudor Ciubotari<br>
+                                        copy advisor : Florin Șerban<br>
+                                        project management advisor : Codruța Sărmășan<br>
+                                        documenting : Gabi Jilav, Valentin Oroian<br>
+                                        location management : Căminul Subcultural<br>
+                                        finisaje ecran proiecție : Tito Atelier
+                                    </p>
+                                    <p>_______<br>ORACOLUL2000 este un proiect finanțat de bursa cultural-artistică a
+                                        Universității Babeș-Bolyai.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Proiect 3: Resorunes -->
+                    <article class="nm-project-slice">
+                        <div class="slideshow-bg" id="bg-resorunes"></div>
+                        <div class="nm-logo-container">
+                            <img class="nm-logo aligned-logo resorunes-logo"
+                                src="imagini/proiecte new media/1 resorunes/logo resorunes.webp" alt="Logo Resorunes">
+                        </div>
+                        <div class="content-container center-aligned">
+                            <h2 class="album-title serif">resorunes</h2>
+                            <div class="description">
+                                <p><em>resorunes</em> este o compoziție gameful (un hibrid jocuri video - compoziție
+                                    muzicală)
+                                    ce combină mecanici de gameplay cu mijloace noi de expresie muzicală utilizând o
+                                    pereche de controlere magnetice Thales (concepute de Nicola Privato la Intellinget
+                                    Instrument Labs, construite și modificate de către Călin Nahaiciuc). Se așează pe a
+                                    crea o călătorie interactivă prin o serie de lumi muzicale interconectate și pe a
+                                    explora cumulul de posibilități de inducție a stării de flow preluate atât din
+                                    musick-ing, cât și jocuri video.</p>
+                                <p>Proiect expus la ediția din 2025 a festivalul de arte digitale Ars Electronica.</p>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </div> <!-- end new-media-section -->
+
+        <!-- ABOUT SECTION -->
+        <div id="about-section" class="view-section" style="display: none;">
+            <div class="music-portfolio about-wrapper">
+
+                <div class="about-tabs-container">
+                    <div class="about-nav">
+                        <button class="about-tab-btn active" onclick="switchAboutTab('bio-tab', event)">BUNĂ</button>
+                        <button class="about-tab-btn" onclick="switchAboutTab('statement-tab', event)">credo</button>
+                        <button class="about-tab-btn" onclick="switchAboutTab('process-tab', event)">CV
+                            ARTISTIC</button>
+                    </div>
+
+                    <div class="about-content-area">
+                        <!-- BIO TAB -->
+                        <div id="bio-tab" class="about-tab-content active dynamic-section" data-bg="#121212"
+                            data-text="#f0f0f0">
+                            <h2 class="section-title serif">BUNĂ</h2>
+                            <div class="description about-text">
+                                <p><strong>Mă numesc Călin</strong> și mă străduiesc să fac diverse lucruri interesante
+                                    aflate undeva la intersecția între muzică electronică experimentală, tehnici
+                                    dobândite din infinit fascinantă lumea a tehnologiei și diverse domenii de cercetare
+                                    relevante social precum cultura pop, sustenabilitate și politică, printre altele.
+                                </p>
+
+                                <p>Sub pseudonimul de <strong>producător</strong>, Marcus Aburelius, am creat o serie de
+                                    albume de muzică electronică conceptuale precum <em>O zi de toamnă în Cluj</em>,
+                                    <em>Before</em> și <em>Natura Selected Works</em> ce urmăresc să implementeze
+                                    structuri scenaristice și tehnici filmice deprinse din fundalul meu de filmolog în
+                                    mutații creative asupra unor felurite genuri de muzică. De asemenea, sunt un
+                                    rezident al Căminului Subcultural și fost rezident al defunctului club de muzică
+                                    underground Gazette. Am avut performance-uri live de muzică electronică în diverse
+                                    spații precum Platforma Wolf, MOX, Faber. Recent am început să pendulez spre lumea
+                                    performance-urilor AV, incorporând lumini, proiecții video și lasere în show-uri din
+                                    locații precum Binaural Nodar și Cinema Arta.
+                                </p>
+
+                                <p>Iar drept <strong>artist multimedia</strong>, sunt într-o continuă căutare de noi
+                                    tărâmuri ce le pot explora și integra în configurații artistice tot mai ambițioase.
+                                    Fie că e vorba de <em>oracolul2000</em>, un proiect intermedia cu și despre cultura
+                                    pop a României anilor 2000, Fie că de <em>unicorner</em>, un proiect ce facilitează
+                                    accesul intuitiv al DJ-ilor la VJ-ing (proiect ce a câștigat "best use of
+                                    TouchDesigner" în cadrul hackaton-ului Music Hackspace 2026 din Lisabona) sau de
+                                    <em>resorunes</em>, o compoziție gameful, adică un joc pe care îl cânți, pentru care
+                                    am manufacturat o pereche de controlere magnetice Thales (proiect ce a fost expus la
+                                    Ars Electronica).
+                                </p>
+
+                                <p>Dacă aveți idei de care credeți că aș fi entuziasmat, sau dacă vreți să mă
+                                    comisionați, nu ezitați să-mi scrieți la: <a href="mailto:calinnahaiciuc@proton.me"
+                                        style="color: #fff; text-decoration: underline;">calinnahaiciuc@proton.me</a>.
+                                </p>
+
+                                <div class="social-links" style="display: flex; gap: 1.5rem; margin-top: 2rem;">
+                                    <a href="https://marcusaburelius.bandcamp.com/" target="_blank"
+                                        style="color: #f0f0f0; transition: color 0.3s;"
+                                        onmouseover="this.style.color='#ff9800'"
+                                        onmouseout="this.style.color='#f0f0f0'">
+                                        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                                            <path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z" />
+                                        </svg>
+                                    </a>
+                                    <a href="https://www.instagram.com/aburelius/" target="_blank"
+                                        style="color: #f0f0f0; transition: color 0.3s;"
+                                        onmouseover="this.style.color='#ff9800'"
+                                        onmouseout="this.style.color='#f0f0f0'">
+                                        <svg viewBox="0 0 24 24" width="28" height="28" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                        </svg>
+                                    </a>
+                                    <a href="https://www.youtube.com/@aburelius" target="_blank"
+                                        style="color: #f0f0f0; transition: color 0.3s;"
+                                        onmouseover="this.style.color='#ff9800'"
+                                        onmouseout="this.style.color='#f0f0f0'">
+                                        <svg viewBox="0 0 24 24" width="28" height="28" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path
+                                                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
+                                            </path>
+                                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STATEMENT TAB -->
+                        <div id="statement-tab" class="about-tab-content dynamic-section" style="display: none;"
+                            data-bg="#161618" data-text="#f0f0f0">
+                            <div style="display: flex; align-items: baseline; justify-content: space-between;">
+                                <h2 class="section-title serif" id="credo-title"
+                                    style="cursor: default; margin-bottom: 0;">
+                                    <span>c</span><span>r</span><span>e</span><span>d</span><span>o</span>
+                                </h2>
+                                <input type="range" id="volume-fader" min="0" max="100" value="0"
+                                    title="Synth Volume" />
+                            </div>
+                            <div class="credo-list">
+                                <div class="credo-item">sound for sound's sake.</div>
+                                <div class="credo-item">a void, the hype.</div>
+                                <div class="credo-item">going for conversations with the greats even though all you can
+                                    do is bow and say "wow".</div>
+                                <div class="credo-item">sort of progressive but in a !not nerdy way.</div>
+                                <div class="credo-item">related : f u n (keee)</div>
+                                <div class="credo-item">sleeper design - unassuming simplicity hiding under the hood
+                                    complexity.</div>
+                                <div class="credo-item">somehow trying to contribute to social good.</div>
+                                <div class="credo-item">novelty recipe : gradual accumulating toolkit via sustained
+                                    small bet experimentation, organic atomizing and recombining loved works through
+                                    emulation, going for highest hanging fruit aka doing your best to not be lazy and to
+                                    scout and position yourself at the horizons of knowledge</div>
+                                <div class="credo-item">that being said : depth of pursuit and authenticity taking
+                                    center stage over capitalism tainted notions of originality.</div>
+                                <div class="credo-item">that feeling of finding out what you really care about when the
+                                    parameter spaces just click, aka how does music deepen your relationship with life ?
+                                </div>
+                                <div class="credo-item">related : music (and art in general, but mostly music) sort of
+                                    always gently waved me toward the yet inconceivable good and better, no outside
+                                    world contract will ever make that worth tainting</div>
+                                <div class="credo-item">also related : risk sounding pretentious if you really feel it.
+                                </div>
+                                <div class="credo-item">so here's another one : absolute music aesthetics engendering
+                                    cinema-like programmatic immersion and somehow this !not being a contradiction.
+                                </div>
+                                <div class="credo-item">think before, flow after.</div>
+                            </div>
+                        </div>
+
+                        <!-- CV TAB -->
+                        <div id="process-tab" class="about-tab-content dynamic-section" style="display: none;"
+                            data-bg="#1a1a1a" data-text="#f0f0f0">
+                            <h2 class="section-title serif" style="margin-bottom: 2rem;">CV ARTISTIC</h2>
+                            <div class="description about-text cv-content"
+                                style="text-align: left; max-width: 800px; margin: 0 auto;">
+
+                                <h3 class="serif" style="color: #f0f0f0; letter-spacing: 2px; margin: 2.5rem 0 1rem;">
+                                    PROJECTS (EXCLUDING MUSIC RELEASES)</h3>
+                                <ul style="list-style-type: none; padding: 0; color: #cccccc; margin-bottom: 2rem;">
+                                    <li style="margin-bottom: 0.8rem;"><strong>31/05/2026 - 07/06/2026</strong><br>AV
+                                        set development for Gonçalo Cuaron</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>07/05/2026 -
+                                            10/05/2026</strong><br>Artistic Residency at Binural/Nodar in Viseu,
+                                        Portugal</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>16/05/2026 -
+                                            17/05/2026</strong><br>unicorner - Music Hackspace Hackaton project</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>01/10/2025 -
+                                            CURRENT</strong><br>oracolul2000 - University of Babeș-Bolyai artistic grant
+                                        project (oracolul2000.ro)</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>10/2025</strong><br>Live AV motion
+                                        graphics for Marja Burchard's concert at Cinema Arta</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2025</strong><br>'resorunes' video game
+                                        inspired music production installation with self built controllers at Ars
+                                        Electronica Campus 2025</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2024</strong><br>Live soundtracking the
+                                        'Secrete Întrețesute' textiles exhibition at Faber Timișoara</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2024</strong><br>'Create 3d visuals using
+                                        Touch Designer and Ableton Live' workshop host at the Make Music Not War Music
+                                        Production School</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2024</strong><br>Performance artist as
+                                        part of Tiong Ang's 'The Second' happening at UNArte Gallery</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2024</strong><br>Resident at the Muzicon
+                                        Creative Summer Camp</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2022 - 2023</strong><br>Live-in informal
+                                        residency at Overstate Studio in Cluj-Napoca</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2021 - 2022</strong><br>as part of an
+                                        improv music trio with Andrei Bălan and Călin Torsan; sound design for Andreea
+                                        David's Fictions, My Body dance performance at CNDB; playing bass guitar as part
+                                        of Tiong Ang's 'The Second Hands' at MNAC.</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2019 - CURRENT</strong><br>various live
+                                        music performances and DJ sets (2025 - Platforma Wolf, Mox Festival, Căminul
+                                        Subcultural; 2024 - Atelier Cafe, Căminul Subcultural, Hideout Alba, electronic
+                                        live sessions by Psihodrom and Muzicon.hub; 2023 - Flying Circus, Atelier Cafe,
+                                        Hibrid; 2019 - Gazette, Collectiva Gazette, MOX Festival, Mumush)</li>
+                                </ul>
+
+                                <h3 class="serif" style="color: #f0f0f0; letter-spacing: 2px; margin: 2.5rem 0 1rem;">
+                                    CONFERENCES & SEMINARS</h3>
+                                <ul style="list-style-type: none; padding: 0; color: #cccccc; margin-bottom: 2rem;">
+                                    <li style="margin-bottom: 0.8rem;"><strong>09/2025 - 11/2025</strong><br>Participant
+                                        at the Eastern European Music Academy 2025</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2025</strong><br>Participant at Days of
+                                        Spatial Sound at elektron.art kunstisaal, Tallinn, Estonia</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2025</strong><br>Participant at
+                                        LIVESPACE_2025 spatial sound conference, Vilnius, Lithuania</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2024</strong><br>Resident at the Muzicon
+                                        Creative Summer Camp, Buzad, Romania</li>
+                                </ul>
+
+                                <h3 class="serif" style="color: #f0f0f0; letter-spacing: 2px; margin: 2.5rem 0 1rem;">
+                                    EDUCATION & TRAINING</h3>
+                                <ul style="list-style-type: none; padding: 0; color: #cccccc; margin-bottom: 2rem;">
+                                    <li style="margin-bottom: 0.8rem;"><strong>09/02/2026 -
+                                            22/06/2026</strong><br>ERASMUS MA IN GAME DEVELOPMENT AND CONTEMPORARY ARTS
+                                        - UNIVERSITY OF AVEIRO, PORTUGAL</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2025</strong><br>ERASMUS MA IN ELECTRONIC
+                                        MUSIC COMPOSITION - LITHUANIAN ACADEMY OF MUSIC AND THEATRE</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2024 - Current</strong><br>MA IN DIGITAL
+                                        INTERACTIVE ARTS - FACULTY OF THEATRE AND FILM., BABEȘ-BOLYAI UNIVERSITY, CLUJ
+                                        NAPOCA</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2014 - 2015</strong><br>ERASMUS BA
+                                        STUDENT - ANADOLU UNIVERSITY, ESKISHEHIR, TÜRKIYE</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2012 - 2015</strong><br>BA IN FILM THEORY
+                                        - FACULTY OF THEATRE AND FILM., BABEȘ-BOLYAI UNIVERSITY, CLUJ NAPOCA</li>
+                                    <li style="margin-bottom: 0.8rem;"><strong>2009 - 2012</strong><br>MATHEMATICS IT /
+                                        ENGLISH INTENSIVE - MIHAI EMINESCU HIGH SCHOOL, SUCEAVA, ROMANIA</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end about-section -->
+
+    </main>
+
+    <script>
+        // ---- CREDO HOVER EFFECT ----
+        document.addEventListener('DOMContentLoaded', () => {
+            const credoItems = document.querySelectorAll('.credo-item');
+            let colorIdx = 0;
+            credoItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    item.setAttribute('data-color-idx', (colorIdx % 6) + 1);
+                    colorIdx++;
+                });
+            });
+
+            const credoTitle = document.getElementById('credo-title');
+            if (credoTitle) {
+                const spans = credoTitle.querySelectorAll('span');
+                const palette = ['#39FF14', '#00FFFF', '#FF00FF', '#FFA000', '#FFFF00', '#B200FF'];
+                credoTitle.addEventListener('mouseenter', () => {
+                    spans.forEach(span => {
+                        const randomColor = palette[Math.floor(Math.random() * palette.length)];
+                        span.style.color = randomColor;
+                        span.style.textShadow = `0 0 15px ${randomColor}88`;
+                    });
+                });
+                credoTitle.addEventListener('mouseleave', () => {
+                    spans.forEach(span => {
+                        span.style.color = '';
+                        span.style.textShadow = '';
+                    });
+                });
+            }
+        });
+
+        // ---- INTRO IMAGE WALL ----
+        const introImages = [
+            "imagini/coperți albume/before cover.webp",
+            "imagini/coperți albume/comefomi cover.webp",
+            "imagini/coperți albume/cover bn hai.webp",
+            "imagini/coperți albume/gazetofon compilație 1.webp",
+            "imagini/coperți albume/glnee cover.webp",
+            "imagini/coperți albume/gpeeler cover.webp",
+            "imagini/coperți albume/hit aniversare 2018 cover.webp",
+            "imagini/coperți albume/muzicon cover.webp",
+            "imagini/coperți albume/natura cover.webp",
+            "imagini/coperți albume/o zi de toamnă în cluj cover.webp",
+            "imagini/coperți albume/op6autumn cover.webp",
+            "imagini/coperți albume/psihodrom 5 cover.webp",
+            "imagini/coperți albume/psihodrom 6 cover.webp",
+            "imagini/coperți albume/rupe cover.webp",
+            "imagini/coperți albume/sesiune cu rodion cover.webp",
+            "imagini/coperți albume/vln etudes cover.webp",
+            "imagini/proiecte new media/1 resorunes/1.webp",
+            "imagini/proiecte new media/1 resorunes/2.webp",
+            "imagini/proiecte new media/1 resorunes/3.webp",
+            "imagini/proiecte new media/1 resorunes/4.webp",
+            "imagini/proiecte new media/2 oracolul 2000/1.jpeg",
+            "imagini/proiecte new media/2 oracolul 2000/3.webp",
+            "imagini/proiecte new media/2 oracolul 2000/4.webp",
+            "imagini/proiecte new media/4 unicorner/1.webp",
+            "imagini/proiecte new media/4 unicorner/2.webp",
+            "imagini/proiecte new media/4 unicorner/3.webp",
+            "imagini/proiecte new media/4 unicorner/4.webp",
+            "imagini/proiecte new media/4 unicorner/5.webp",
+            "imagini/proiecte new media/4 unicorner/6.webp",
+            "imagini/~general/background.webp"
+        ];
+
+        let wallImgElements = [];
+        let isWallUpdating = false;
+
+        function generateImageWall() {
+            const introCover = document.getElementById('intro-cover');
+            if (!introCover) return;
+
+            // Curăță grid-ul vechi dacă există
+            const oldWall = introCover.querySelector('.image-wall');
+            if (oldWall) oldWall.remove();
+
+            const wallContainer = document.createElement('div');
+            wallContainer.className = 'image-wall';
+
+            // Fără imagini duplicate: le folosim pe toate cele 26, amestecate aleatoriu
+            let displayImages = [...introImages].sort(() => Math.random() - 0.5);
+
+            wallImgElements = [];
+            let hugeCount = 0;
+
+            displayImages.forEach((src, index) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.loading = 'lazy';
+                img.style.objectFit = 'cover';
+
+                let randomSpan;
+                const isAlbumCover = src.includes('coperți albume');
+
+                // Ne asigurăm că există fix 1-2 imagini foarte mari (50% mai mari)
+                if (hugeCount < 2 && (Math.random() > 0.85 || (displayImages.length - index) <= (2 - hugeCount))) {
+                    randomSpan = 'span-5-5';
+                    hugeCount++;
+                } else {
+                    let spanTypes;
+                    if (isAlbumCover) {
+                        spanTypes = [
+                            'span-1-1', 'span-1-1', 'span-1-1', 'span-1-1', // foarte multe mici
+                            'span-2-2', 'span-2-2', 'span-2-2',
+                            'span-3-3', 'span-3-3',
+                            'span-4-4'
+                        ];
+                    } else {
+                        spanTypes = [
+                            'span-1-1', 'span-1-1', 'span-1-1', 'span-1-1', // foarte multe mici
+                            'span-2-2', 'span-2-2', 'span-2-2',
+                            'span-3-3', 'span-3-3',
+                            'span-4-4',
+                            'span-2-1', 'span-1-2',
+                            'span-3-2', 'span-2-3'
+                        ];
+                    }
+                    randomSpan = spanTypes[Math.floor(Math.random() * spanTypes.length)];
+                }
+                img.className = randomSpan;
+
+                wallContainer.appendChild(img);
+                wallImgElements.push(img);
+            });
+
+            introCover.prepend(wallContainer);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            generateImageWall();
+
+            // Efect de vizibilitate bazat pe distanța individuală a fiecărei imagini față de cursor
+            document.addEventListener('mousemove', (e) => {
+                if (siteLoaded || isWallUpdating) return;
+                isWallUpdating = true;
+
+                requestAnimationFrame(() => {
+                    const mouseX = e.clientX;
+                    const mouseY = e.clientY;
+                    const radius = 280; // Raza în care imaginile devin vizibile
+
+                    wallImgElements.forEach(img => {
+                        const rect = img.getBoundingClientRect();
+                        // Calculăm centrul imaginii
+                        const centerX = rect.left + rect.width / 2;
+                        const centerY = rect.top + rect.height / 2;
+
+                        // Distanța dintre cursor și centrul imaginii
+                        const dist = Math.hypot(mouseX - centerX, mouseY - centerY);
+
+                        if (dist < radius) {
+                            img.classList.add('revealed');
+                        } else {
+                            img.classList.remove('revealed');
+                        }
+                    });
+
+                    isWallUpdating = false;
+                });
+            });
+        });
+
+        // ---- SPA NAVIGATION LOGIC ----
+        let siteLoaded = false;
+
+        function returnToSplash() {
+            siteLoaded = false;
+            document.body.classList.remove('site-loaded');
+
+            const introCover = document.getElementById('intro-cover');
+            if (introCover) {
+                introCover.classList.remove('hidden');
+                // Regenerăm un grid nou pentru efectul de refresh
+                generateImageWall();
+            }
+
+            const viewSections = document.querySelectorAll('.view-section');
+            viewSections.forEach(sec => {
+                sec.classList.remove('active');
+                setTimeout(() => sec.style.display = 'none', 300);
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleAboutOrSplash() {
+            const aboutSection = document.getElementById('about-section');
+            // Dacă suntem deja pe pagina About (bio, statement, etc.), dăm înapoi
+            if (aboutSection && aboutSection.style.display === 'block') {
+                returnToSplash();
+            } else {
+                switchSection('about-section');
+            }
+        }
+
+        function switchSection(sectionId) {
+            if (!siteLoaded) {
+                siteLoaded = true;
+                const introCover = document.getElementById('intro-cover');
+                if (introCover) introCover.classList.add('hidden');
+                document.body.classList.add('site-loaded');
+            }
+            // Ascunde toate secțiunile principale
+            const viewSections = document.querySelectorAll('.view-section');
+            viewSections.forEach(sec => {
+                sec.classList.remove('active');
+                sec.style.display = 'none';
+            });
+
+            // Actualizează clasele pe linkurile de navigație (doar roluri)
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            if (sectionId === 'music-section') {
+                document.getElementById('nav-music').classList.add('active');
+            } else if (sectionId === 'new-media-section') {
+                document.getElementById('nav-new-media').classList.add('active');
+            }
+
+            // Afișează secțiunea dorită
+            const targetSection = document.getElementById(sectionId);
+            targetSection.style.display = 'block';
+
+            // Oprește/Reîncarcă iframe-urile la prima afișare pentru ca Bandcamp să le poată calcula corect dimensiunile
+            if (!targetSection.dataset.iframesLoaded) {
+                targetSection.dataset.iframesLoaded = "true";
+                const iframes = targetSection.querySelectorAll('iframe');
+                iframes.forEach(iframe => {
+                    const src = iframe.src;
+                    iframe.src = '';
+                    iframe.src = src;
+                });
+            }
+
+            // Folosim un mic delay pentru ca display: block să fie procesat înainte de a adăuga clasa
+            setTimeout(() => {
+                targetSection.classList.add('active');
+
+                // Re-trigger color update for the first visible dynamic-section in the new view
+                const activeDynamic = Array.from(targetSection.querySelectorAll('.dynamic-section')).find(el => el.style.display !== 'none');
+                if (activeDynamic) {
+                    updateColors(activeDynamic);
+                } else if (sectionId === 'about-section') {
+                    updateColorsByValues('#121212', '#f0f0f0');
+                }
+            }, 20);
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchAboutTab(tabId, event) {
+            document.querySelectorAll('.about-tab-content').forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.display = 'none';
+            });
+
+            document.querySelectorAll('.about-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const targetTab = document.getElementById(tabId);
+            targetTab.style.display = 'block';
+
+            setTimeout(() => {
+                targetTab.classList.add('active');
+                if (targetTab.classList.contains('dynamic-section')) {
+                    updateColors(targetTab);
+                }
+            }, 20);
+
+            event.currentTarget.classList.add('active');
+        }
+
+        // Funcție extrasă pentru a actualiza culorile global
+        function updateColorsByValues(bgColor, textColor) {
+            document.body.style.setProperty('--bg-color', bgColor);
+            document.body.style.setProperty('--text-primary', textColor);
+
+            if (textColor === '#1a1a1a') {
+                document.body.style.setProperty('--text-secondary', '#555555');
+                document.body.classList.add('light-mode');
+            } else {
+                document.body.style.setProperty('--text-secondary', '#aaaaaa');
+                document.body.classList.remove('light-mode');
+            }
+        }
+
+        function updateColors(element) {
+            const bgColor = element.getAttribute('data-bg');
+            const textColor = element.getAttribute('data-text');
+            updateColorsByValues(bgColor, textColor);
+        }
+
+        // Logică pentru a schimba culoarea de fundal și text la scroll
+        const sections = document.querySelectorAll('.dynamic-section');
+
+        // Setările observer-ului: se activează când centrul secțiunii ajunge la jumătatea ecranului
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50% 0px -50% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Doar dacă e intersectată și e vizibilă în secțiunea curent activă
+                if (entry.isIntersecting && entry.target.closest('.view-section.active')) {
+                    updateColors(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Oprește automat celelalte playere când se dă click pe altul
+        // Folosim setInterval în loc de blur pentru a detecta sigur click-urile între iframe-uri
+        let activeIframe = null;
+        setInterval(() => {
+            const currentIframe = document.activeElement;
+            if (currentIframe && currentIframe.tagName === 'IFRAME') {
+                if (activeIframe && activeIframe !== currentIframe) {
+                    // Reîncărcăm iframe-ul anterior pentru a opri redarea, 
+                    // deoarece Bandcamp nu are un API JS de pauză
+                    const oldSrc = activeIframe.src;
+                    activeIframe.src = '';
+                    activeIframe.src = oldSrc;
+                }
+                activeIframe = currentIframe;
+            }
+        }, 250);
+
+        // --- NEW MEDIA BACKGROUND SLIDESHOWS ---
+        const newMediaProjects = {
+            'bg-unicorner': [
+                'imagini/proiecte new media/4 unicorner/1.webp',
+                'imagini/proiecte new media/4 unicorner/2.webp',
+                'imagini/proiecte new media/4 unicorner/3.webp',
+                'imagini/proiecte new media/4 unicorner/4.webp',
+                'imagini/proiecte new media/4 unicorner/5.webp',
+                'imagini/proiecte new media/4 unicorner/6.webp'
+            ],
+            'bg-oracolul': [
+                'imagini/proiecte new media/2 oracolul 2000/1.jpeg',
+                'imagini/proiecte new media/2 oracolul 2000/2.mp4',
+                'imagini/proiecte new media/2 oracolul 2000/3.webp',
+                'imagini/proiecte new media/2 oracolul 2000/4.webp'
+            ],
+            'bg-resorunes': [
+                'imagini/proiecte new media/1 resorunes/1.webp',
+                'imagini/proiecte new media/1 resorunes/2.webp',
+                'imagini/proiecte new media/1 resorunes/3.webp',
+                'imagini/proiecte new media/1 resorunes/4.webp',
+                'imagini/proiecte new media/1 resorunes/WhatsApp Video 2025-09-05 at 12.35.16.mp4'
+            ]
+        };
+
+        function initSlideshows() {
+            for (const [containerId, images] of Object.entries(newMediaProjects)) {
+                const container = document.getElementById(containerId);
+                if (!container || images.length === 0) continue;
+
+                images.forEach((src, index) => {
+                    const isVideo = src.toLowerCase().endsWith('.mp4');
+                    const media = document.createElement(isVideo ? 'video' : 'img');
+                    media.src = src;
+
+                    if (isVideo) {
+                        media.autoplay = true;
+                        media.loop = true;
+                        media.muted = true;
+                        media.playsInline = true;
+                    }
+
+                    if (index === 0) media.classList.add('active');
+                    container.appendChild(media);
+                });
+
+                if (images.length > 1) {
+                    let currentIndex = 0;
+                    const mediaElements = container.querySelectorAll('img, video');
+                    setInterval(() => {
+                        mediaElements[currentIndex].classList.remove('active');
+                        currentIndex = (currentIndex + 1) % mediaElements.length;
+                        mediaElements[currentIndex].classList.add('active');
+                    }, 3000); // 3 secunde pentru fiecare media
+                }
+            }
+        }
+
+        // Inițializare slideshow-uri după încărcarea documentului
+        document.addEventListener('DOMContentLoaded', initSlideshows);
+        // Script pentru expandarea secțiunilor New Media la click
+        document.addEventListener('click', (e) => {
+            const slice = e.target.closest('.nm-project-slice');
+            if (!slice) return;
+
+            // Dacă s-a dat click pe un logo sau pe containerul lui, ignoră toggle-ul
+            if (e.target.closest('.nm-logo-link') || e.target.closest('.nm-logo')) return;
+
+            slice.classList.toggle('expanded');
+        });
+    </script>
+    <script src="synth.js"></script>
+</body>
+
+</html>
