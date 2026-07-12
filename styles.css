@@ -1335,6 +1335,7 @@ body.light-mode .pink-text p {
     body {
         transition: color 0.3s ease;
     }
+
     #bg-layer {
         transition: background-color 0.3s ease;
     }
