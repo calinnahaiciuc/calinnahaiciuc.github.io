@@ -1319,6 +1319,11 @@ body.light-mode .pink-text p {
    ========================================= */
 @media (max-width: 768px) {
 
+    /* BODY TRANSITION FIX FOR MOBILE */
+    body {
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
     /* TYPOGRAPHY & HEADER */
     .intro-name {
         font-size: 2.2rem;
@@ -1344,6 +1349,7 @@ body.light-mode .pink-text p {
     .header-roles {
         flex-direction: column;
         align-items: flex-end;
+        text-align: right;
         gap: 0.5rem;
     }
 
