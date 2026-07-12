@@ -756,9 +756,6 @@ input[type="range"]#volume-fader::-moz-range-thumb {
 
 .video-wrapper {
     position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
     z-index: 1;
     background: #111;
     border-radius: 4px;
@@ -770,8 +767,38 @@ input[type="range"]#volume-fader::-moz-range-thumb {
     transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0s;
 }
 
-.grid-item:hover .video-wrapper {
+/* Default Right Slide & explicit .slide-right */
+.video-wrapper, .video-wrapper.slide-right {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+.grid-item:hover .video-wrapper:not(.slide-left):not(.slide-down), 
+.grid-item:hover .video-wrapper.slide-right {
     transform: translate(100%, -50%);
+}
+
+/* Left Slide */
+.video-wrapper.slide-left {
+    top: 50%;
+    right: auto;
+    left: 0;
+    transform: translateY(-50%);
+}
+.grid-item:hover .video-wrapper.slide-left {
+    transform: translate(-100%, -50%);
+}
+
+/* Down Slide */
+.video-wrapper.slide-down {
+    top: auto;
+    bottom: 0;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, 0);
+}
+.grid-item:hover .video-wrapper.slide-down {
+    transform: translate(-50%, 100%);
 }
 
 .video-link {
