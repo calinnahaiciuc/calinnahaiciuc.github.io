@@ -494,8 +494,8 @@ body.light-mode .about-nav {
 @media (max-width: 768px) {
     .credo-stamp {
         width: 150px;
-        bottom: 1rem;
-        right: 1rem;
+        bottom: -2.5rem;
+        right: -15%;
     }
 }
 
