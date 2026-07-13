@@ -33,8 +33,8 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    right: 0;
+    bottom: 0;
     background-color: var(--bg-color);
     z-index: -100;
     pointer-events: none;
@@ -345,6 +345,7 @@ body.light-mode .main-header {
     display: flex;
     align-items: flex-start;
     padding-top: 4rem;
+    padding-bottom: 6rem;
 }
 
 .about-tabs-container {
@@ -491,13 +492,7 @@ body.light-mode .about-nav {
     filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
 
-@media (max-width: 768px) {
-    .credo-stamp {
-        width: 150px;
-        bottom: -2.5rem;
-        right: -15%;
-    }
-}
+
 
 input[type="range"]#volume-fader {
     -webkit-appearance: none;
@@ -1470,10 +1465,9 @@ body.light-mode .pink-text p {
 
     /* CREDO STAMP BIGGER & RIGHT-DOWN */
     .credo-stamp {
-        width: 300px !important;
-        /* Doubled for mobile */
-        bottom: -3rem !important;
-        right: -3rem !important;
+        width: 200px !important;
+        bottom: -4rem !important;
+        right: -20% !important;
     }
 
     /* ABOUT NAV & TABS */
