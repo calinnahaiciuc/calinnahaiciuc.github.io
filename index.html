@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portofoliu artistic și muzical Călin Nahaiciuc. Producător de muzică electronică și artist new media.">
+    <meta name="description"
+        content="Portofoliu artistic și muzical Călin Nahaiciuc. Producător de muzică electronică și artist new media.">
     <meta name="google-site-verification" content="VU0b5A5c-vPBW0AnQ1AR_YqhTiIIAvFIqUPu4pOVWhg">
     <title>Călin Nahaiciuc _ portofolio</title>
     <link rel="icon" type="image/webp" href="imagini/general/abureli autentice icon.webp">
@@ -51,7 +52,7 @@
             <div class="music-portfolio">
                 <header class="portfolio-header dynamic-section" data-bg="#121212" data-text="#f0f0f0">
                     <h1>ALBUME MUZICALE</h1>
-                    <p class="subtitle">drept Marcus Aburelius</p>
+                    <p class="subtitle">sub pseudonimul modular Marcus Aburelius</p>
                 </header>
 
                 <!-- ALBUME PRINCIPALE -->
@@ -543,126 +544,280 @@
 
                 <section class="nm-projects-list">
                     <!-- Proiect 1: Unicorner -->
-                    <article class="nm-project-slice">
-                        <div class="slideshow-bg" id="bg-unicorner"></div>
-                        <div class="nm-logo-container unicorner-logo-container">
-                            <img class="nm-logo aligned-logo unicorner-logo"
-                                src="imagini/proiecte new media/4 unicorner/logoUnicorner.webp" alt="Logo Unicorner">
+                    <article class="nm-project-slice" id="project-unicorner">
+                        <div class="nm-header">
+                            <div class="slideshow-bg" id="bg-unicorner"></div>
+                            <div class="nm-header-content">
+                                <img class="nm-logo unicorner-logo"
+                                    src="imagini/proiecte new media/4 unicorner/logoUnicorner.webp"
+                                    alt="Logo Unicorner">
+                                <div class="nm-header-text">
+                                    <h2 class="album-title serif">unicorner</h2>
+                                    <p class="subtitle">VJ-ing intuitiv și generativ pentru DJ</p>
+                                </div>
+                                <div class="nm-expand-hint">&darr;</div>
+                            </div>
                         </div>
-                        <div class="content-container center-aligned">
-                            <h2 class="album-title serif">unicorner</h2>
-                            <div class="description">
-                                <p><em>unicorner</em> este un proiect ce facilitează exprimarea artistică a DJ-ilor prin
-                                    intermediul mediului VJ-ing. Proiectul conectează software-ul pentru DJ-ing DJay Pro
-                                    cu TouchDesigner și extrage diverse informații din selecția muzicală pentru a crea
-                                    un visualizer customizat, nuanțat și audioreactiv ce oferă o serie de mijloace
-                                    intuitive unui DJ pentru a putea manipula expresiv vizualele generative.</p>
-                                <p>Proiectul a câștigat premiul "Best use of Touch Designer" la hackathon-ul Music
-                                    Hackspace din Lisabona din 2026.</p>
-                                <div class="expandable-content">
-                                    <p>Proiect creat de echipa :<br>
-                                        Călin - programarea graficei generative în TouchDesigner, interfațarea DJPro cu
-                                        TD, definirea manuală parametrilor de control<br>
-                                        Dan - modul ce permite utilizarea LLM-urilor în cadrul proiectului pentru a
-                                        genera parametrii de control într-un mod intuitiv<br>
-                                        Bernardo - identatea vizuală (cu Călin) + controller UX (cu Dan)<br>
-                                        Guille - extragerea semnalului audio<br>
-                                        Eugene - QA</p>
+                        <div class="nm-expanded-content">
+                            <div class="nm-grid">
+                                <div class="nm-gallery" id="gallery-unicorner" data-media='[
+                                    {"src":"imagini/proiecte new media/4 unicorner/1.webp", "type":"img", "caption":"Sesiune live de VJ-ing generativ folosind Unicorner."},
+                                    {"src":"imagini/proiecte new media/4 unicorner/2.webp", "type":"img", "caption":"Detalii din interfața de control TouchDesigner."},
+                                    {"src":"imagini/proiecte new media/4 unicorner/3.webp", "type":"img", "caption":"Echipa Unicorner lucrând la Music Hackspace."},
+                                    {"src":"imagini/proiecte new media/4 unicorner/4.webp", "type":"img", "caption":"Testarea vizualurilor audioreactive."},
+                                    {"src":"imagini/proiecte new media/4 unicorner/5.webp", "type":"img", "caption":"Configurarea parametrilor prin LLM."},
+                                    {"src":"imagini/proiecte new media/4 unicorner/6.webp", "type":"img", "caption":"Prezentarea finală a proiectului."}
+                                ]'>
+                                    <div class="nm-gallery-main"></div>
+                                    <div class="nm-gallery-controls">
+                                        <button class="gallery-prev">&lt;</button>
+                                        <button class="gallery-next">&gt;</button>
+                                        <button class="gallery-mute">Mute</button>
+                                    </div>
+                                    <p class="nm-gallery-caption"><em></em></p>
+                                </div>
+                                <div class="nm-info">
+                                    <ul class="nm-metadata">
+                                        <li><strong>anul:</strong> 2026</li>
+                                        <li><strong>rol:</strong> programare grafică generativă, interfațare DJPro, UX.
+                                        </li>
+                                        <li><strong>tehnologii:</strong> TouchDesigner, DJay Pro, LLM.</li>
+                                        <li><strong>context:</strong> <a
+                                                href="https://musichackspace.org/events/hackathon-lisbon-spring-2026/projects"
+                                                target="_blank" rel="noopener noreferrer">"best use of Touch Designer" -
+                                                Music Hackspace Lisbon 2026</a></li>
+                                    </ul>
+                                    <div class="description">
+                                        <p><em>unicorner</em> este un proiect ce facilitează extinderea exprimării
+                                            artistice a DJ-ilor prin intermediul mediului de VJ-ing. Proiectul
+                                            conectează software-ul DJay Pro (compatibilitatea cu alte DJ softwares este
+                                            în dezvoltare) cu TouchDesigner și extrage diverse informații din selecția
+                                            muzicală pentru a automatiza creația un visualizer customizat, nuanțat și
+                                            audioreactiv ce oferă o serie de mijloace intuitive unui DJ pentru a putea
+                                            manipula expresiv vizualele generative.</p>
+                                        <p><strong>echipa:</strong> Călin (programare TD, UX), Dan (modul LLM), Bernardo
+                                            (identitate, controller UX), Guille (extragere semnal audio), Eugene (QA).
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </article>
 
                     <!-- Proiect 2: Oracolul 2000 -->
-                    <article class="nm-project-slice">
-                        <div class="slideshow-bg" id="bg-oracolul"></div>
-                        <div class="nm-logo-container">
-                            <a href="https://oracolul2000.ro/" target="_blank" class="nm-logo-link"
-                                title="Vizitează oracolul2000.ro">
-                                <img class="nm-logo padded-png"
-                                    src="imagini/proiecte new media/2 oracolul 2000/logo oracolul românia.png"
-                                    alt="Logo Oracolul 2000">
-                            </a>
+                    <article class="nm-project-slice" id="project-oracolul">
+                        <div class="nm-header">
+                            <div class="slideshow-bg" id="bg-oracolul"></div>
+                            <div class="nm-header-content">
+                                <a href="https://oracolul2000.ro/" target="_blank" class="nm-logo-link"
+                                    title="Vizitează oracolul2000.ro">
+                                    <img class="nm-logo oracolul-logo"
+                                        src="imagini/proiecte new media/2 oracolul 2000/logo oracolul românia.png"
+                                        alt="Logo Oracolul 2000">
+                                </a>
+                                <div class="nm-header-text">
+                                    <h2 class="album-title serif">oracolul 2000</h2>
+                                    <p class="subtitle">explorări intermedia ale culturii pop românești Y2K</p>
+                                </div>
+                                <div class="nm-expand-hint">&darr;</div>
+                            </div>
                         </div>
-                        <div class="content-container center-aligned">
-                            <h2 class="album-title serif">oracolul 2000</h2>
-                            <div class="description">
-                                <p><em>oracolul2000</em> este un proiect multimedia cu și despre cultura pop a României
-                                    începutului anilor 2000. În contextul actual, marcat de o accelerare a globalizării
-                                    algoritmice și de o criză a imaginației culturale, proiectul propune un act de
-                                    arheologie digitală și nostalgie reflexivă. Obiectivul central este de a crea o
-                                    experiență imersivă care nu doar recreează, ci și re-contextualizează o perioadă
-                                    definită de o originalitate hibridă, aflată la intersecția dintre moștenirea
-                                    post-comunistă și aspirațiile occidentale.</p>
-                                <p>Platforma web, nucleul proiectului, simulează un mediu computerizat din acea eră (un
-                                    birou virtual și un desktop Windows XP), transformând utilizatorul din spectator
-                                    pasiv într-un explorator activ. Prin intermediul unor "aplicații" simulate – un
-                                    oracol digital, un player de muzică, o arhivă de artefacte – proiectul invită la o
-                                    reflecție critică asupra modului în care tehnologia ne-a modelat identitatea,
-                                    comunicarea și memoria colectivă, punând întrebări precum : există o nostalgie
-                                    analitică, care să nu să se piardă în trecut, dar care să îl mineze pentru a ne
-                                    actualiza atitudinea asupra prezentului? Ce anume de atunci merită sărbătorit și
-                                    păstrat ? Ce am pierdut, dar și ce am câștigat între timp?</p>
-                                <div class="expandable-content">
-                                    <p>Principalele a avut următoarele componente:</p>
-                                    <ul style="text-align: left; margin: 1rem 0 1rem 2rem; list-style-type: disc;">
-                                        <li><strong>website oracolul2000.ro</strong> (cu “proto-platforma” de social
-                                            media a caietului de oracol și o arhivă a canonului pop-cultural y2k („year
-                                            2000” – termen folosit pentru a descrie perioada începutului anilor 2000)
-                                            împachetată într-o interfață Windows XP.</li>
-                                        <li><strong>o lansare muzicală cu propria sa platformă</strong>: site-ul conține
-                                            un “walkman” skeumorfic ce conține muzica unei album muzical ce omagiază si
-                                            isi propune să traseze o legătură între muzica pop românească y2k si
-                                            numeroase tradiții globale de muzică de dans underground</li>
-                                        <li><strong>un show AV</strong> - rezultatul unei mini-rezidențe în cadrul
-                                            Căminulului Subcultural ce a avut loc pe 6 februarie 2026 (se lucrează
-                                            momentan la o versiune fixed media a show-ului)</li>
-                                        <li><strong>o colecție de 25 de casete unicat</strong> – înspre promovarea
-                                            evenimentului am creat o tombolă prin care am oferit câștigătorilor una din
-                                            cele 25 de casete cu materialul muzical înscripționat și cu un design unicat
-                                            și cu carcase customizate printate 3d .</li>
+                        <div class="nm-expanded-content">
+                            <div class="nm-grid">
+                                <div class="nm-gallery" id="gallery-oracolul" data-media='[
+                                    {"src":"imagini/proiecte new media/2 oracolul 2000/1.jpeg", "type":"img", "caption":"Prezentarea vizuală a conceptului Oracolul 2000."},
+                                    {"src":"imagini/proiecte new media/2 oracolul 2000/2.mp4", "type":"video", "caption":"Interfața web nostalgică tip Windows XP."},
+                                    {"src":"imagini/proiecte new media/2 oracolul 2000/3.webp", "type":"img", "caption":"Caseta fizică unicat realizată pentru proiect."},
+                                    {"src":"imagini/proiecte new media/2 oracolul 2000/4.webp", "type":"img", "caption":"Detalii din evenimentul live AV Căminul Subcultural."}
+                                ]'>
+                                    <div class="nm-gallery-main"></div>
+                                    <div class="nm-gallery-controls">
+                                        <button class="gallery-prev">&lt;</button>
+                                        <button class="gallery-next">&gt;</button>
+                                        <button class="gallery-mute">Mute</button>
+                                    </div>
+                                    <p class="nm-gallery-caption"><em></em></p>
+                                </div>
+                                <div class="nm-info">
+                                    <ul class="nm-metadata">
+                                        <li><strong>anul:</strong> 2025 - prezent</li>
+                                        <li><strong>rol:</strong> project lead, concept, muzică, design, webdev.</li>
+                                        <li><strong>finanțare:</strong> bursa cultural-artistică a Universității
+                                            Babeș-Bolyai.</li>
+                                        <li><strong>componente:</strong> platformă web interactivă, lansare muzicală,
+                                            show live AV.</li>
                                     </ul>
-                                    <p>
-                                        project lead / concept / muzică / design / webdev : Călin Nahaiciuc<br>
-                                        profesor coordonator : Cristina Pop-Tiron<br>
-                                        live AV led lights : Cristian Dubineanschi<br>
-                                        live AV projections OPs : Marina Gheorghe, Norbert Dakograff<br>
-                                        casette sleeve 3d design and printing : Simon George<br>
-                                        comentarii text arhivă : Oana Mocanu<br>
-                                        artwork / design advisor : Alexandra Mocan<br>
-                                        back and forth idei man : Tudor Ciubotari<br>
-                                        copy advisor : Florin Șerban<br>
-                                        project management advisor : Codruța Sărmășan<br>
-                                        documenting : Gabi Jilav, Valentin Oroian<br>
-                                        location management : Căminul Subcultural<br>
-                                        finisaje ecran proiecție : Tito Atelier
-                                    </p>
-                                    <p>_______<br>ORACOLUL2000 este un proiect finanțat de bursa cultural-artistică a
-                                        Universității Babeș-Bolyai.</p>
+                                    <div class="description">
+                                        <p><em>oracolul2000</em> este un proiect intermedia cu și despre cultura pop a
+                                            României începutului anilor 2000. Proiectul a avut mai multe componente : o
+                                            interpretare digitală a "proto rețelei sociale" caietului de oracol, un
+                                            player online de muzică tip walkman skeumorfic și o serie de release-uri
+                                            muzicale aferente (reinterpretări ale muzicii perioadei într-o cheie
+                                            hauntologică Love Parade-y a unui "summer of love" absent în istoria
+                                            României), o arhivă a artefactelor pop y2k structurată drept un desktop de
+                                            Windows XP, o serie de 25 de casete unicat cu carcase printate 3d și un set
+                                            AV (ce a form performat live și la care o versiune fixed media este în
+                                            dezvoltare. <a href="https://oracolul2000.ro/" target="_blank"
+                                                rel="noopener noreferrer" style="color: #ffffff;">vizitați oracolul2000
+                                                aici</a>.</p>
+                                        <p>Proiectul a fost susținut de o <span class="wiki-hover-trigger"
+                                                onclick="event.stopPropagation(); this.classList.toggle('active');">echipă
+                                                amplă<span class="wiki-hover-card"><span class="wiki-card-title">echipa
+                                                        oracolul2000</span><span class="wiki-card-list"><span
+                                                            class="wiki-list-item"><strong>project lead / concept /
+                                                                muzică / design / webdev :</strong> Călin
+                                                            Nahaiciuc</span><span
+                                                            class="wiki-list-item"><strong>profesor coordonator
+                                                                :</strong> Cristina Pop-Tiron</span><span
+                                                            class="wiki-list-item"><strong>live AV led lights :</strong>
+                                                            Cristian Dubineanschi</span><span
+                                                            class="wiki-list-item"><strong>live AV projections
+                                                                :</strong> Marina Gheorghe, Norbert
+                                                            Dakograff</span><span class="wiki-list-item"><strong>casette
+                                                                sleeve 3d design and printing :</strong> Simon
+                                                            George</span><span class="wiki-list-item"><strong>comentarii
+                                                                text arhivă :</strong> Oana Mocanu</span><span
+                                                            class="wiki-list-item"><strong>artwork / design advisor
+                                                                :</strong> Alexandra Mocan</span><span
+                                                            class="wiki-list-item"><strong>back and forth idei man
+                                                                :</strong> Tudor Ciubotari</span><span
+                                                            class="wiki-list-item"><strong>copy advisor :</strong>
+                                                            Florin Șerban</span><span
+                                                            class="wiki-list-item"><strong>project management advisor
+                                                                :</strong> Codruța Sărmășan</span><span
+                                                            class="wiki-list-item"><strong>documenting :</strong> Gabi
+                                                            Jilav, Valentin Oroian, Călin Bocian</span><span
+                                                            class="wiki-list-item"><strong>location management
+                                                                :</strong> Căminul Subcultural</span><span
+                                                            class="wiki-list-item"><strong>finisaje ecran proiecție
+                                                                :</strong> Tito Atelier</span></span></span></span> care
+                                            a gestionat documentarea, designul 3D, luminile și logistica expozițională
+                                            pentru evenimentul live.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </article>
 
                     <!-- Proiect 3: Resorunes -->
-                    <article class="nm-project-slice">
-                        <div class="slideshow-bg" id="bg-resorunes"></div>
-                        <div class="nm-logo-container">
-                            <img class="nm-logo aligned-logo resorunes-logo"
-                                src="imagini/proiecte new media/1 resorunes/logo resorunes.webp" alt="Logo Resorunes">
+                    <article class="nm-project-slice" id="project-resorunes">
+                        <div class="nm-header">
+                            <div class="slideshow-bg" id="bg-resorunes"></div>
+                            <div class="nm-header-content">
+                                <img class="nm-logo resorunes-logo"
+                                    src="imagini/proiecte new media/1 resorunes/logo resorunes.webp"
+                                    alt="Logo Resorunes">
+                                <div class="nm-header-text">
+                                    <h2 class="album-title serif">resorunes</h2>
+                                    <p class="subtitle">compoziție muzicală gameful cu instrumente bespoke</p>
+                                </div>
+                                <div class="nm-expand-hint">&darr;</div>
+                            </div>
                         </div>
-                        <div class="content-container center-aligned">
-                            <h2 class="album-title serif">resorunes</h2>
-                            <div class="description">
-                                <p><em>resorunes</em> este o compoziție gameful (un hibrid jocuri video - compoziție
-                                    muzicală)
-                                    ce combină mecanici de gameplay cu mijloace noi de expresie muzicală utilizând o
-                                    pereche de controlere magnetice Thales (concepute de Nicola Privato la Intellinget
-                                    Instrument Labs, construite și modificate de către Călin Nahaiciuc). Se așează pe a
-                                    crea o călătorie interactivă prin o serie de lumi muzicale interconectate și pe a
-                                    explora cumulul de posibilități de inducție a stării de flow preluate atât din
-                                    musick-ing, cât și jocuri video.</p>
-                                <p>Proiect expus la ediția din 2025 a festivalul de arte digitale Ars Electronica.</p>
+                        <div class="nm-expanded-content">
+                            <div class="nm-grid">
+                                <div class="nm-gallery" id="gallery-resorunes" data-media='[
+                                    {"src":"imagini/proiecte new media/1 resorunes/1.webp", "type":"img", "caption":"Expoziția Resorunes la Ars Electronica."},
+                                    {"src":"imagini/proiecte new media/1 resorunes/2.webp", "type":"img", "caption":"Participanți interacționând cu instrumentul muzical gameful."},
+                                    {"src":"imagini/proiecte new media/1 resorunes/3.webp", "type":"img", "caption":"Detalii hardware ale controlerelor magnetice."},
+                                    {"src":"imagini/proiecte new media/1 resorunes/4.webp", "type":"img", "caption":"Sistemul de feedback vizual și setup-ul expozitiv."},
+                                    {"src":"imagini/proiecte new media/1 resorunes/WhatsApp Video 2025-09-05 at 12.35.16.mp4", "type":"video", "caption":"Demonstrație live a funcționării sistemului Thales."}
+                                ]'>
+                                    <div class="nm-gallery-main"></div>
+                                    <div class="nm-gallery-controls">
+                                        <button class="gallery-prev">&lt;</button>
+                                        <button class="gallery-next">&gt;</button>
+                                        <button class="gallery-mute">Mute</button>
+                                    </div>
+                                    <p class="nm-gallery-caption"><em></em></p>
+                                </div>
+                                <div class="nm-info">
+                                    <ul class="nm-metadata">
+                                        <li><strong>anul:</strong> 2025</li>
+                                        <li><strong>rol:</strong> construcție/modificare hardware, compoziție.</li>
+                                        <li><strong>tehnologii:</strong> controlere magnetice Thales (Intelligent
+                                            Instrument Labs).</li>
+                                        <li><strong>context:</strong> expus la festivalul de arte digitale Ars
+                                            Electronica 2025.</li>
+                                    </ul>
+                                    <div class="description">
+                                        <p><em>resorunes</em> este o <a
+                                                href="https://link.springer.com/book/10.1007/978-3-032-12682-5"
+                                                target="_blank" rel="noopener noreferrer" class="wiki-hover-trigger"
+                                                style="color: #ffffff; text-decoration: none;">compoziție gameful<span
+                                                    class="wiki-hover-card" style="width: 480px;"><span
+                                                        class="wiki-card-content"
+                                                        style="display: flex; gap: 12px; align-items: flex-start;"><img
+                                                            src="imagini/proiecte new media/1 resorunes/gameful.webp"
+                                                            alt="Compoziții Gameful"
+                                                            style="width: 120px; border-radius: 4px; flex-shrink: 0;"><span
+                                                            style="font-size: 0.8rem; line-height: 1.4; color: #cccccc; flex: 1; text-align: left;"><span
+                                                                style="display: block;">Digital gameful compositions
+                                                                (DGCs) in interactive computer music are
+                                                                interdisciplinary new media works that seamlessly
+                                                                integrate digital games and music performance. These
+                                                                performative and interactive musical works are
+                                                                structured by game mechanics, allowing music to emerge
+                                                                organically through the player-performer's dynamic
+                                                                engagement within the
+                                                                system.</span></span></span></span></a> (un hibrid
+                                            jocuri video - compoziție muzicală) ce combină mecanici de gameplay cu
+                                            mijloace noi de expresie muzicală utilizând o pereche de <a
+                                                href="https://iil.is/research/thales" target="_blank"
+                                                rel="noopener noreferrer" class="wiki-hover-trigger"
+                                                style="color: #ffffff; text-decoration: none;">controlere magnetice
+                                                Thales<span class="wiki-hover-card card-bottom"
+                                                    style="width: 540px;"><span class="wiki-card-content"
+                                                        style="display: flex; gap: 12px; align-items: flex-start;"><img
+                                                            src="imagini/proiecte new media/1 resorunes/thales.jpg.webp"
+                                                            alt="Thales Controllers"
+                                                            style="width: 140px; border-radius: 4px; flex-shrink: 0;"><span
+                                                            style="font-size: 0.8rem; line-height: 1.4; color: #cccccc; flex: 1; text-align: left;"><span
+                                                                style="display: block; margin-bottom: 6px;">Thales is a
+                                                                composed instrument based on two wireless controllers
+                                                                that interact with each other through their tangible
+                                                                magnetic fields. Its name comes from Thales of Miletus,
+                                                                the philosopher who described magnets as having a
+                                                                soul.</span><span style="display: block;">Each
+                                                                controller contains a stack
+                                                                of magnets, a magnetometer and a gyroscope. When the
+                                                                performer joins the controllers, these repel each other
+                                                                allowing him to play with the tangible manifestation of
+                                                                their opposing magnetic fields as a sort of invisible
+                                                                yet tangible entity, where the acceleration and
+                                                                orientation of the discs, intertwined with the position
+                                                                and strength of the magnetic fields, defines parameters
+                                                                of the sound.</span></span></span></span></a> (concepute
+                                            de <a href="https://nicolaprivato.com/" target="_blank"
+                                                rel="noopener noreferrer" class="wiki-hover-trigger"
+                                                style="color: #ffffff; text-decoration: none;">Nicola Privato<span
+                                                    class="wiki-hover-card" style="width: 480px;"><span
+                                                        class="wiki-card-content"
+                                                        style="display: flex; gap: 12px; align-items: flex-start;"><img
+                                                            src="imagini/proiecte new media/1 resorunes/nicola.jpg.webp"
+                                                            alt="Nicola Privato"
+                                                            style="width: 120px; border-radius: 4px; flex-shrink: 0;"><span
+                                                            style="font-size: 0.8rem; line-height: 1.4; color: #cccccc; flex: 1; text-align: left;"><span
+                                                                style="display: block; margin-bottom: 6px;">Nicola
+                                                                Privato is an Italian artist and researcher based in
+                                                                Reykjavik, Iceland.</span><span
+                                                                style="display: block; margin-bottom: 6px;">His practice
+                                                                embraces music performance and composition, instrument
+                                                                design and human-computer interaction, with a focus on
+                                                                interactive technologies and AI.</span><span
+                                                                style="display: block;">He is a researcher at the
+                                                                Intelligent Instruments Lab, where he explores through
+                                                                practice research (including electroacoustic
+                                                                composition, performance practice, design of musical
+                                                                interfaces) and critical theory how artificial
+                                                                intelligence enters and influences discourse, culture,
+                                                                and society.</span></span></span></span></a> la
+                                            Intelligent Instrument Labs, construite și modificate de către Călin
+                                            Nahaiciuc) pentru a crea o călătorie interactivă printr-o serie de lumi
+                                            muzicale interconectate, explorând cumulul de posibilități de inducție a
+                                            stării de flow preluate atât din musick-ing, cât și din jocurile video.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </article>
@@ -1090,12 +1245,51 @@
                     isWallUpdating = false;
                 });
             });
+
+            // Check initial hash for deep linking
+            if (window.location.hash) {
+                setTimeout(handleHash, 100);
+            }
         });
+
+        // --- DEEP LINKING LOGIC ---
+        function handleHash() {
+            const hash = window.location.hash.substring(1);
+
+            const mainSections = ['music-section', 'new-media-section', 'about-section'];
+            const aboutTabs = ['bio-tab', 'statement-tab', 'process-tab'];
+            const nmProjects = ['project-unicorner', 'project-oracolul', 'project-resorunes'];
+
+            if (mainSections.includes(hash)) {
+                switchSection(hash, false);
+            } else if (aboutTabs.includes(hash)) {
+                switchSection('about-section', false);
+                switchAboutTab(hash, null, false);
+            } else if (nmProjects.includes(hash)) {
+                switchSection('new-media-section', false);
+                document.querySelectorAll('.nm-project-slice').forEach(slice => slice.classList.remove('expanded'));
+
+                const targetProject = document.getElementById(hash);
+                if (targetProject) {
+                    targetProject.classList.add('expanded');
+                    setTimeout(() => {
+                        const gallery = targetProject.querySelector('.nm-gallery');
+                        if (gallery && typeof playCurrentGalleryVideo === 'function') {
+                            playCurrentGalleryVideo(gallery);
+                        }
+                        targetProject.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                }
+            } else if (!hash) {
+                returnToSplash(false);
+            }
+        }
+        window.addEventListener('hashchange', handleHash);
 
         // ---- SPA NAVIGATION LOGIC ----
         let siteLoaded = false;
 
-        function returnToSplash() {
+        function returnToSplash(updateHash = true) {
             siteLoaded = false;
             document.body.classList.remove('site-loaded');
 
@@ -1113,6 +1307,10 @@
             });
 
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+
+            if (updateHash) {
+                history.pushState(null, null, window.location.pathname);
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -1126,7 +1324,7 @@
             }
         }
 
-        function switchSection(sectionId) {
+        function switchSection(sectionId, updateHash = true) {
             if (!siteLoaded) {
                 siteLoaded = true;
                 const introCover = document.getElementById('intro-cover');
@@ -1146,6 +1344,10 @@
                 document.getElementById('nav-music').classList.add('active');
             } else if (sectionId === 'new-media-section') {
                 document.getElementById('nav-new-media').classList.add('active');
+            }
+
+            if (updateHash) {
+                history.pushState(null, null, '#' + sectionId);
             }
 
             // Afișează secțiunea dorită
@@ -1179,7 +1381,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function switchAboutTab(tabId, event) {
+        function switchAboutTab(tabId, event, updateHash = true) {
             document.querySelectorAll('.about-tab-content').forEach(tab => {
                 tab.classList.remove('active');
                 tab.style.display = 'none';
@@ -1199,7 +1401,16 @@
                 }
             }, 20);
 
-            event.currentTarget.classList.add('active');
+            if (event) {
+                event.currentTarget.classList.add('active');
+            } else {
+                const btn = document.querySelector(`button[onclick*="${tabId}"]`);
+                if (btn) btn.classList.add('active');
+            }
+
+            if (updateHash) {
+                history.pushState(null, null, '#' + tabId);
+            }
         }
 
         // Funcție extrasă pentru a actualiza culorile global
@@ -1335,17 +1546,156 @@
             }
         }
 
-        // Inițializare slideshow-uri după încărcarea documentului
-        document.addEventListener('DOMContentLoaded', initSlideshows);
-        // Script pentru expandarea secțiunilor New Media la click
+        const galleries = {};
+
+        function initGalleries() {
+            document.querySelectorAll('.nm-gallery').forEach(gallery => {
+                const mediaData = JSON.parse(gallery.getAttribute('data-media'));
+                const mainContainer = gallery.querySelector('.nm-gallery-main');
+                const captionEl = gallery.querySelector('.nm-gallery-caption em');
+                const prevBtn = gallery.querySelector('.gallery-prev');
+                const nextBtn = gallery.querySelector('.gallery-next');
+                const muteBtn = gallery.querySelector('.gallery-mute');
+
+                let currentIndex = 0;
+                let mediaElements = [];
+
+                mediaData.forEach((item, index) => {
+                    let el;
+                    if (item.type === 'video') {
+                        el = document.createElement('video');
+                        el.src = item.src;
+                        el.loop = true;
+                        el.muted = false;
+                        el.playsInline = true;
+                    } else {
+                        el = document.createElement('img');
+                        el.src = item.src;
+                    }
+                    if (index === 0) el.classList.add('active');
+                    mainContainer.appendChild(el);
+                    mediaElements.push(el);
+                });
+
+                function updateGallery(index) {
+                    mediaElements.forEach((el, i) => {
+                        if (i === index) {
+                            el.classList.add('active');
+                            if (el.tagName === 'VIDEO' && gallery.closest('.nm-project-slice').classList.contains('expanded')) {
+                                el.play().catch(e => {
+                                    console.log('Autoplay blocked, falling back to muted');
+                                    el.muted = true;
+                                    muteBtn.textContent = 'Unmute';
+                                    el.play().catch(err => console.log(err));
+                                });
+                            }
+                        } else {
+                            el.classList.remove('active');
+                            if (el.tagName === 'VIDEO') {
+                                el.pause();
+                            }
+                        }
+                    });
+                    // Funcționalitatea de text descriptiv este scoasă temporar la cerere
+                    // captionEl.textContent = mediaData[index].caption;
+
+                    const currentEl = mediaElements[index];
+                    if (currentEl.tagName === 'VIDEO') {
+                        muteBtn.style.display = 'block';
+                        muteBtn.textContent = currentEl.muted ? 'Unmute' : 'Mute';
+                    } else {
+                        muteBtn.style.display = 'none';
+                    }
+                }
+
+                prevBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    currentIndex = (currentIndex - 1 + mediaElements.length) % mediaElements.length;
+                    updateGallery(currentIndex);
+                });
+
+                nextBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    currentIndex = (currentIndex + 1) % mediaElements.length;
+                    updateGallery(currentIndex);
+                });
+
+                muteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const currentEl = mediaElements[currentIndex];
+                    if (currentEl.tagName === 'VIDEO') {
+                        currentEl.muted = !currentEl.muted;
+                        muteBtn.textContent = currentEl.muted ? 'Unmute' : 'Mute';
+                    }
+                });
+
+                updateGallery(0);
+                galleries[gallery.id] = { updateGallery, mediaElements };
+            });
+        }
+
+        function pauseAndMuteGallery(gallery) {
+            const state = galleries[gallery.id];
+            if (state) {
+                state.mediaElements.forEach(el => {
+                    if (el.tagName === 'VIDEO') {
+                        el.pause();
+                    }
+                });
+            }
+        }
+
+        function playCurrentGalleryVideo(gallery) {
+            const state = galleries[gallery.id];
+            if (state) {
+                const activeEl = state.mediaElements.find(el => el.classList.contains('active'));
+                if (activeEl && activeEl.tagName === 'VIDEO') {
+                    activeEl.play().catch(e => {
+                        activeEl.muted = true;
+                        const muteBtn = gallery.querySelector('.gallery-mute');
+                        if (muteBtn) muteBtn.textContent = 'Unmute';
+                        activeEl.play().catch(err => console.log(err));
+                    });
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initSlideshows();
+            initGalleries();
+        });
+
         document.addEventListener('click', (e) => {
-            const slice = e.target.closest('.nm-project-slice');
+            const header = e.target.closest('.nm-header');
+            if (!header) return;
+
+            const slice = header.closest('.nm-project-slice');
             if (!slice) return;
 
-            // Dacă s-a dat click pe un logo sau pe containerul lui, ignoră toggle-ul
-            if (e.target.closest('.nm-logo-link') || e.target.closest('.nm-logo')) return;
+            if (e.target.closest('.nm-logo-link')) return;
 
-            slice.classList.toggle('expanded');
+            const isExpanded = slice.classList.toggle('expanded');
+
+            const gallery = slice.querySelector('.nm-gallery');
+            if (!isExpanded) {
+                if (gallery) pauseAndMuteGallery(gallery);
+            } else {
+                if (gallery) playCurrentGalleryVideo(gallery);
+            }
+
+            if (slice.id) {
+                if (isExpanded) {
+                    history.pushState(null, null, '#' + slice.id);
+                } else {
+                    history.pushState(null, null, '#new-media-section');
+                }
+            }
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.wiki-hover-trigger')) {
+                document.querySelectorAll('.wiki-hover-trigger.active').forEach(trig => trig.classList.remove('active'));
+            }
         });
     </script>
     <script src="synth.js"></script>

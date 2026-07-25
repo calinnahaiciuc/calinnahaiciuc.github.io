@@ -18,7 +18,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     overflow-x: hidden;
 }
 
@@ -582,17 +583,18 @@ input[type="range"]#volume-fader::-moz-range-thumb {
 }
 
 .portfolio-header h1 {
-    font-size: 2.5rem;
+    font-size: 3.25rem;
     font-weight: 600;
     letter-spacing: 4px;
     margin-bottom: 1rem;
+    text-transform: lowercase;
 }
 
 .portfolio-header .subtitle {
     color: var(--text-secondary);
-    font-size: 1.1rem;
+    font-size: 1.45rem;
     letter-spacing: 2px;
-    text-transform: uppercase;
+    text-transform: lowercase;
     transition: color 0.8s ease;
 }
 
@@ -1077,111 +1079,79 @@ body.light-mode .pink-text p {
     top: 0;
     left: 0;
     width: 100%;
-    height: 250px;
-    background: linear-gradient(to bottom, #121212 0%, transparent 100%);
+    height: 150px;
+    background: linear-gradient(to bottom, #121212 0%, rgba(18, 18, 18, 0.4) 40%, transparent 100%);
     z-index: 50;
     pointer-events: none;
 }
 
 .nm-project-slice {
     position: relative;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 4rem 2rem;
-    border-radius: 0;
-    cursor: pointer;
-    /* Click to expand */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 0;
+    padding: 0;
+    background-color: transparent;
     transition: background-color 0.8s ease;
 }
 
-.nm-project-slice::after {
-    content: "Click pentru a extinde detaliile";
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.8rem;
-    opacity: 0.4;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
-
-.nm-project-slice.expanded::after {
-    content: "Click pentru a restrânge detaliile";
-}
-
-.expandable-content {
-    max-height: 0;
+.nm-header {
+    position: relative;
+    height: 50vh;
+    /* Exactly 2 slices visible */
+    width: 100%;
+    cursor: pointer;
     overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.8s ease, opacity 0.6s ease;
+    display: flex;
+    align-items: center;
+    background: transparent;
 }
 
-.nm-project-slice.expanded .expandable-content {
-    max-height: 2500px;
-    opacity: 1;
-    margin-top: 1.5rem;
+.nm-header:hover .slideshow-bg img.active,
+.nm-header:hover .slideshow-bg video.active {
+    opacity: 0.8;
 }
 
-.nm-project-slice.layout-right {
-    /* No flex-direction change needed if logos are absolute */
-}
-
-.nm-logo-container {
+.nm-header::after {
+    content: "";
     position: absolute;
-    top: 50%;
-    left: 6vw;
-    transform: translateY(-50%);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to top, #0d0d0d 0%, rgba(13, 13, 13, 0.7) 40%, transparent 100%);
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.nm-project-slice.expanded .nm-header::after {
+    opacity: 1;
+}
+
+.nm-header-content {
+    position: relative;
     z-index: 10;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 4vw;
+    gap: 3rem;
+}
+
+.nm-header-content> :first-child {
+    flex: 0 0 35vw;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.nm-logo-link {
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-}
-
-.nm-logo-link::after {
-    content: attr(title);
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 100;
-}
-
-.nm-logo-link:hover::after {
-    opacity: 1;
-}
-
-.nm-project-slice.layout-right .nm-logo-container {
-    left: auto;
-    right: 6vw;
-}
-
 .nm-logo {
-    height: 33.33vh;
+    height: 38.5vh !important;
     width: auto;
     max-width: 100%;
     object-fit: contain;
+    flex-shrink: 0;
     filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
     transition: transform 0.3s ease;
 }
@@ -1190,60 +1160,62 @@ body.light-mode .pink-text p {
     transform: scale(1.05);
 }
 
-.nm-logo.padded-png {
-    /* Scale visually without expanding the flex bounding box to compensate for transparent padding */
-    transform: scale(2.4);
-    /* Reduced by 1/3 from 3.6 */
-}
-
-.nm-logo.padded-png:hover {
-    transform: scale(2.52);
-}
-
-.nm-logo.aligned-logo {
-    margin-left: -5vw;
-}
-
-.nm-logo-container.unicorner-logo-container {
-    height: 100%;
-    top: 0;
-    transform: none;
-}
-
 .nm-logo.unicorner-logo {
-    height: 90%;
-    width: auto;
-    max-width: none;
-    transform: none;
-    clip-path: none;
+    width: 45vh !important;
+    height: 70vh !important;
+    transform: rotate(90deg);
+    object-fit: contain;
 }
 
 .nm-logo.unicorner-logo:hover {
-    transform: scale(1.05);
+    transform: rotate(90deg) scale(1.05);
+}
+
+.nm-logo.oracolul-logo {
+    height: 55vh !important;
+    transform: scale(1.8) translateY(-2%);
+}
+
+.nm-logo.oracolul-logo:hover {
+    transform: scale(1.9) translateY(-2%);
 }
 
 .nm-logo.resorunes-logo {
-    transform: scale(1.4);
+    transform: scale(1.2);
 }
 
 .nm-logo.resorunes-logo:hover {
     transform: scale(1.47);
 }
 
-.nm-logo.placeholder {
-    height: 33.33vh;
-    width: 33.33vh;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px dashed rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-family: var(--font-sans);
-    font-weight: 600;
-    text-align: center;
-    padding: 2rem;
+.nm-header-text {
+    flex: 1;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.nm-header-text .album-title {
+    margin: 0;
+    font-size: 2.8rem;
+    letter-spacing: 2px;
+    text-transform: lowercase;
+}
+
+.nm-header-text .subtitle {
+    margin: 0.5rem 0 0 0;
+    font-size: 1.25rem;
+    opacity: 0.6;
+}
+
+.nm-expand-hint {
+    font-size: 2.5rem;
+    opacity: 0.5;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+}
+
+.nm-header:hover .nm-expand-hint {
+    opacity: 1;
+    transform: translateY(5px);
 }
 
 .slideshow-bg {
@@ -1271,55 +1243,281 @@ body.light-mode .pink-text p {
 
 .slideshow-bg img.active,
 .slideshow-bg video.active {
-    opacity: 0.65;
+    opacity: 0.5;
 }
 
-/* Ajustare poziție pentru imaginea 6 din Unicorner */
 .slideshow-bg img[src$="6.webp"] {
     object-position: 85% center !important;
 }
 
-.nm-project-slice .content-container.center-aligned {
+/* Expanded Content */
+.nm-expanded-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    background: #0d0d0d;
+    transition: max-height 0.8s ease, opacity 0.6s ease, overflow 0s linear 0s;
+}
+
+.nm-project-slice.expanded .nm-expanded-content {
+    max-height: 4000px;
+    opacity: 1;
+    overflow: visible;
+    transition: max-height 0.8s ease, opacity 0.6s ease, overflow 0s linear 0.8s;
+}
+
+.nm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.nm-gallery {
     position: relative;
-    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.nm-gallery-main {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #111;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.nm-gallery-main img,
+.nm-gallery-main video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.nm-gallery-main img.active,
+.nm-gallery-main video.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.nm-gallery-controls {
+    position: absolute;
+    top: calc(50% - 1rem);
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.nm-gallery-controls button.gallery-prev,
+.nm-gallery-controls button.gallery-next {
+    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s ease, background 0.3s ease;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nm-gallery-controls button.gallery-prev:hover,
+.nm-gallery-controls button.gallery-next:hover {
+    color: rgba(255, 255, 255, 1);
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.gallery-mute {
+    pointer-events: auto;
+    position: absolute;
+    bottom: -40px;
+    right: 0;
+    font-size: 0.9rem !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.5) !important;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.gallery-mute:hover {
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+.nm-gallery-caption {
+    font-style: italic;
+    color: #aaaaaa;
     text-align: center;
-    max-width: 800px;
-    background: rgba(18, 18, 18, 0.25);
-    padding: 3rem;
-    border-radius: 4px;
-    backdrop-filter: blur(7.5px);
+    margin: 0;
+    font-size: 0.95rem;
+    min-height: 2.5em;
+}
+
+.nm-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.nm-metadata {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    color: #cccccc;
+    font-size: 0.95rem;
+    border-left: 2px solid #444;
+    padding-left: 1.5rem;
+}
+
+.nm-metadata strong {
     color: #f0f0f0;
-    box-shadow: none;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 50px, black calc(100% - 50px), transparent 100%), linear-gradient(to right, transparent 0px, black 50px, black calc(100% - 50px), transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(to bottom, transparent 0px, black 50px, black calc(100% - 50px), transparent 100%), linear-gradient(to right, transparent 0px, black 50px, black calc(100% - 50px), transparent 100%);
-    mask-composite: intersect;
+    margin-right: 0.5rem;
 }
 
-.nm-project-slice .album-title {
-    margin-bottom: 1.5rem;
-    font-size: 2.5rem;
-    letter-spacing: 2px;
+.nm-metadata a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s ease, color 0.2s ease;
 }
 
-.nm-project-slice .description {
-    font-size: 1.1rem;
+.nm-metadata a:hover {
+    color: #ffffff;
+    opacity: 0.85;
+}
+
+.nm-info .description {
+    font-size: 1.05rem;
     line-height: 1.8;
+    color: #e0e0e0;
 }
 
-@media (max-width: 768px) {
-    .nm-project-slice {
-        min-height: 50vh;
-        padding: 2rem 1rem;
-    }
+/* Wikipedia-style Hovercard for Team List */
+.wiki-hover-trigger {
+    position: relative;
+    display: inline;
+    color: var(--text-primary, #ffffff);
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
 
-    .nm-project-slice .content-container.center-aligned {
-        padding: 2rem 1rem;
-    }
+.wiki-hover-trigger:hover,
+.wiki-hover-trigger.active {
+    color: #ff9800;
+}
 
-    .nm-project-slice .album-title {
-        font-size: 2rem;
-    }
+.wiki-hover-card {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    width: 360px;
+    max-width: 85vw;
+    background: #1a1a1e;
+    border: 1px solid #3a3a45;
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75), 0 2px 8px rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #e0e0e0;
+    text-align: left;
+    font-weight: normal;
+}
+
+/* Arrow indicator at bottom of card */
+.wiki-hover-card::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 7px;
+    border-style: solid;
+    border-color: #1a1a1e transparent transparent transparent;
+}
+
+.wiki-hover-card.card-bottom {
+    bottom: auto;
+    top: calc(100% + 12px);
+    transform: translateX(-50%) translateY(-6px);
+}
+
+.wiki-hover-card.card-bottom::after {
+    top: auto;
+    bottom: 100%;
+    border-color: transparent transparent #1a1a1e transparent;
+}
+
+.wiki-hover-trigger:hover .wiki-hover-card,
+.wiki-hover-trigger.active .wiki-hover-card {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.wiki-card-title {
+    display: block;
+    font-family: var(--font-serif, serif);
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #2e2e38;
+}
+
+.wiki-card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    max-height: 260px;
+    overflow-y: auto;
+}
+
+.wiki-card-list .wiki-list-item {
+    display: block;
+    font-size: 0.8rem;
+    color: #cccccc;
+    line-height: 1.4;
+}
+
+.wiki-card-list .wiki-list-item strong {
+    color: #a0a0b8;
+    font-weight: 500;
 }
 
 /* =========================================
@@ -1433,38 +1631,61 @@ body.light-mode .pink-text p {
         transform: translate(-50%, 100%) !important;
     }
 
-    /* NEW MEDIA PROJECT LOGOS OVER TEXT */
-    .nm-project-slice {
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-        align-items: center !important;
-        padding-top: 6rem !important;
+    /* NEW MEDIA PROJECT MOBILE */
+    .nm-grid {
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem;
+        gap: 2rem;
     }
 
-    .nm-logo-container,
-    .nm-project-slice.layout-right .nm-logo-container {
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        right: auto !important;
-        transform: none !important;
-        margin-bottom: 2rem !important;
-        width: 100% !important;
-        height: auto !important;
+    .nm-header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .nm-header-content> :first-child {
+        flex: auto;
+        width: 100%;
+    }
+
+    .nm-header {
+        height: 50vh;
+        padding: 0;
     }
 
     .nm-logo {
-        height: 20vh !important;
+        height: 38.5vh !important;
         margin: 0 auto !important;
     }
 
-    .nm-logo.padded-png {
-        transform: scale(2) !important;
+    .nm-logo.unicorner-logo {
+        width: 20vh !important;
+        height: 20vh !important;
     }
 
-    .nm-logo-container.unicorner-logo-container {
-        height: auto !important;
+    .nm-logo.oracolul-logo {
+        height: 38.5vh !important;
+    }
+
+    .portfolio-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .portfolio-header .subtitle {
+        font-size: 1.15rem;
+    }
+
+    .nm-header-text .album-title {
+        font-size: 2.5rem;
+    }
+
+    .nm-header-text .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .nm-expand-hint {
+        display: block;
     }
 
     /* CREDO STAMP BIGGER & RIGHT-DOWN */
