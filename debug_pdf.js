@@ -25,7 +25,13 @@ const fs = require('fs');
 
   await page.evaluate(() => {
     // Extract Bio, Statement, and CV contents before clearing
-    const bioText = document.querySelector('#bio-tab .about-text')?.innerHTML || '';
+    let bioText = '';
+    const bioMatch = document.documentElement.innerHTML.match(/<!--\s*PDF_3RD_PERSON_BIO_START([\s\S]*?)PDF_3RD_PERSON_BIO_END\s*-->/);
+    if (bioMatch && bioMatch[1]) {
+      bioText = bioMatch[1].trim();
+    } else {
+      bioText = document.querySelector('#bio-tab .about-text')?.innerHTML || '';
+    }
     const statementList = document.querySelector('.credo-list')?.innerHTML || '';
     const cvText = document.querySelector('.cv-content')?.innerHTML || '';
 

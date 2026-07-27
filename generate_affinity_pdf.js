@@ -31,7 +31,13 @@ const fs = require('fs');
   console.log("Formatting DOM for PDF export...");
   await page.evaluate(() => {
     // Extract Bio, Statement, and CV contents before clearing
-    const bioText = document.querySelector('#bio-tab .about-text')?.innerHTML || '';
+    let bioText = '';
+    const bioMatch = document.documentElement.innerHTML.match(/<!--\s*PDF_3RD_PERSON_BIO_START([\s\S]*?)PDF_3RD_PERSON_BIO_END\s*-->/);
+    if (bioMatch && bioMatch[1]) {
+      bioText = bioMatch[1].trim();
+    } else {
+      bioText = document.querySelector('#bio-tab .about-text')?.innerHTML || '';
+    }
     const statementList = document.querySelector('.credo-list')?.innerHTML || '';
     const cvText = document.querySelector('.cv-content')?.innerHTML || '';
 
@@ -125,9 +131,46 @@ const fs = require('fs');
     bioPage.after(cvPage);
     document.body.appendChild(finalPage);
 
-    // Expand New Media slices
+    // Expand New Media slices & create splash-screen style image collages on the left
     document.querySelectorAll('.nm-project-slice').forEach(el => {
         el.classList.add('expanded');
+        const gallery = el.querySelector('.nm-gallery');
+        if (gallery) {
+            let mediaList = [];
+            try {
+                const rawMedia = gallery.getAttribute('data-media');
+                if (rawMedia) mediaList = JSON.parse(rawMedia);
+            } catch (e) {}
+
+            const imageItems = mediaList.filter(item => item.type === 'img' || (item.src && (item.src.endsWith('.webp') || item.src.endsWith('.jpeg') || item.src.endsWith('.png') || item.src.endsWith('.jpg'))));
+
+            if (imageItems.length > 0) {
+                const collageContainer = document.createElement('div');
+                collageContainer.className = 'pdf-nm-collage';
+
+                let spans = [];
+                if (imageItems.length >= 6) {
+                    collageContainer.classList.add('collage-6');
+                    spans = ['span-2-2', 'span-1-1', 'span-1-1', 'span-2-1', 'span-1-1', 'span-1-1'];
+                } else if (imageItems.length === 3 || imageItems.length === 4) {
+                    collageContainer.classList.add('collage-4');
+                    spans = ['span-2-2', 'span-1-1', 'span-1-1', 'span-2-1'];
+                } else {
+                    collageContainer.classList.add('collage-default');
+                    spans = ['span-2-2', 'span-1-1', 'span-2-1', 'span-1-1'];
+                }
+
+                imageItems.forEach((item, i) => {
+                    const img = document.createElement('img');
+                    img.src = item.src;
+                    img.className = `pdf-collage-img ${spans[i] || 'span-1-1'}`;
+                    collageContainer.appendChild(img);
+                });
+
+                gallery.innerHTML = '';
+                gallery.appendChild(collageContainer);
+            }
+        }
     });
 
     // 5. GROUP MARCUS ABURELIUS MAIN ALBUMS (2 PER PAGE, FULL-WIDTH EDGE-TO-EDGE COLOR STRIPS)
@@ -234,6 +277,11 @@ const fs = require('fs');
         size: A4 portrait;
         margin: 0 !important;
       }
+      ::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+      }
       * {
         transition: none !important;
         animation: none !important;
@@ -245,7 +293,7 @@ const fs = require('fs');
         font-family: system-ui, -apple-system, sans-serif !important;
         margin: 0 !important;
         padding: 0 !important;
-        width: 210mm !important;
+        width: 100vw !important;
       }
       .portfolio-content, .music-portfolio {
         margin: 0 !important;
@@ -259,7 +307,8 @@ const fs = require('fs');
 
       /* Base single-page layout */
       .pdf-page {
-        width: 210mm !important;
+        width: 100vw !important;
+        height: 100vh !important;
         box-sizing: border-box !important;
         position: relative !important;
         page-break-after: always !important;
@@ -271,10 +320,10 @@ const fs = require('fs');
 
       /* 1. COVER PAGE - Full bleed, non-distorted aspect ratio, zero top/bottom black bars */
       .pdf-cover-page {
-        height: 297mm !important;
-        max-height: 297mm !important;
-        min-height: 297mm !important;
-        width: 210mm !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        min-height: 100vh !important;
+        width: 100vw !important;
         padding: 0 !important;
         margin: 0 !important;
         background-image: url('imagini/general/background.webp') !important;
@@ -331,9 +380,9 @@ const fs = require('fs');
 
       /* 2. BIO & CV PAGES */
       .pdf-bio-page {
-        height: 297mm !important;
-        max-height: 297mm !important;
-        min-height: 297mm !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        min-height: 100vh !important;
         padding: 2.5rem 3rem !important;
         background: #121212 !important;
         color: #f0f0f0 !important;
@@ -343,13 +392,22 @@ const fs = require('fs');
         overflow: hidden !important;
       }
       .pdf-cv-page {
-        min-height: 297mm !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        max-height: none !important;
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: block !important;
         padding: 2.5rem 3rem !important;
         background: #121212 !important;
         color: #f0f0f0 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
+        overflow: visible !important;
+      }
+      .pdf-cv-page li {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
       }
       .pdf-section-heading {
         font-size: 1.6rem !important;
@@ -411,10 +469,10 @@ const fs = require('fs');
       }
 
       .pdf-albums-page {
-        width: 210mm !important;
-        height: 297mm !important;
-        max-height: 297mm !important;
-        min-height: 297mm !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        min-height: 100vh !important;
         padding: 0 !important;
         display: flex !important;
         flex-direction: column !important;
@@ -490,10 +548,10 @@ const fs = require('fs');
 
       /* 4. COMBINED SINGLE-URI & APARIȚII PE COMPILAȚII PAGE (50% ENLARGED ARTWORKS & GREY DIVIDERS) */
       .pdf-singles-compilations-page {
-        width: 210mm !important;
-        height: 297mm !important;
-        max-height: 297mm !important;
-        min-height: 297mm !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        min-height: 100vh !important;
         margin: 0 !important;
         padding: 1.4rem 2rem !important;
         background: #f0f0f0 !important;
@@ -565,10 +623,10 @@ const fs = require('fs');
 
       /* 5. ALTE LANSĂRI PAGE (MUZICON PINK TEXT & FILMUL UNEI ZILE PRESERVED) */
       .pdf-other-releases-page {
-        width: 210mm !important;
-        height: 297mm !important;
-        max-height: 297mm !important;
-        min-height: 297mm !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        min-height: 100vh !important;
         padding: 0 !important;
         margin: 0 !important;
         background: #ffffff !important;
@@ -664,10 +722,10 @@ const fs = require('fs');
         margin: 0 !important;
       }
       .nm-project-slice {
-        width: 210mm !important;
-        height: 297mm !important;
-        max-height: 297mm !important;
-        min-height: 297mm !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        min-height: 100vh !important;
         padding: 2.5rem 3rem !important;
         margin: 0 !important;
         background: #121212 !important;
@@ -690,6 +748,25 @@ const fs = require('fs');
         align-items: center !important;
         background: #1a1a1a !important;
         flex: 0 0 155px !important;
+      }
+      .nm-expanded-content {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100% !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+      }
+      .nm-grid {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 2rem !important;
+        flex: 1 !important;
+        height: 100% !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
       }
       .slideshow-bg {
         position: absolute !important;
@@ -793,6 +870,60 @@ const fs = require('fs');
       }
       .nm-gallery {
         flex: 1.1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        height: 100% !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+      }
+      .pdf-nm-collage {
+        display: grid !important;
+        grid-template-columns: 1.2fr 1fr !important;
+        grid-auto-flow: dense !important;
+        gap: 12px !important;
+        width: 100% !important;
+        height: 100% !important;
+        flex: 1 !important;
+        box-sizing: border-box !important;
+      }
+      .pdf-nm-collage.collage-6 {
+        grid-template-columns: 1.2fr 1fr !important;
+        grid-template-rows: repeat(4, 1fr) !important;
+      }
+      .pdf-nm-collage.collage-4 {
+        grid-template-columns: 1.3fr 1fr !important;
+        grid-template-rows: repeat(3, 1fr) !important;
+      }
+      .pdf-nm-collage.collage-default {
+        grid-template-columns: 1.2fr 1fr !important;
+        grid-template-rows: repeat(3, 1fr) !important;
+      }
+      .pdf-nm-collage img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        border-radius: 6px !important;
+        display: block !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.35) !important;
+      }
+      .pdf-nm-collage .span-2-2 {
+        grid-column: span 2 !important;
+        grid-row: span 2 !important;
+      }
+      .pdf-nm-collage .span-2-1 {
+        grid-column: span 2 !important;
+        grid-row: span 1 !important;
+      }
+      .pdf-nm-collage .span-1-2 {
+        grid-column: span 1 !important;
+        grid-row: span 2 !important;
+      }
+      .pdf-nm-collage .span-1-1 {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
       }
       .nm-gallery-main img, .nm-gallery-main video {
         display: none !important;
@@ -839,9 +970,9 @@ const fs = require('fs');
 
       /* 7. FINAL PAGE */
       .pdf-final-page {
-        height: 297mm !important;
-        max-height: 297mm !important;
-        min-height: 297mm !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        min-height: 100vh !important;
         padding: 2.5rem 3rem !important;
         text-align: center !important;
         align-items: center !important;
