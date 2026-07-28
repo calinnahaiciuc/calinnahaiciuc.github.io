@@ -6,7 +6,7 @@ const fs = require('fs');
   console.log("Starting Puppeteer for Portfolio PDF...");
   const browser = await puppeteer.launch({ protocolTimeout: 300000 });
   const page = await browser.newPage();
-  
+
   page.on('console', msg => console.log('PAGE LOG:', msg.text()));
   page.on('pageerror', err => console.log('PAGE ERROR:', err.toString()));
 
@@ -23,7 +23,8 @@ const fs = require('fs');
     }
   });
 
-  const filePath = `file:///${path.resolve(__dirname, 'index.html').replace(/\\/g, '/')}`;
+  const { pathToFileURL } = require('url');
+  const filePath = pathToFileURL(path.resolve(__dirname, 'index.html')).href;
   console.log(`Navigating to ${filePath}...`);
   await page.setViewport({ width: 1200, height: 800 });
   await page.goto(filePath, { waitUntil: 'domcontentloaded' });
@@ -80,10 +81,10 @@ const fs = require('fs');
         <div class="pdf-cover-tagline">artist new media & producător muzică electronică</div>
         <div class="pdf-cover-divider"></div>
         <div class="pdf-cover-meta">
-          <p><strong>Email:</strong> calinnahaiciuc@proton.me</p>
-          <p><strong>Website:</strong> calinnahaiciuc.github.io</p>
-          <p><strong>Bandcamp:</strong> marcusaburelius.bandcamp.com</p>
-          <p><strong>Instagram:</strong> @aburelius</p>
+          <p><strong>Email:</strong> <a href="mailto:calinnahaiciuc@proton.me">calinnahaiciuc@proton.me</a></p>
+          <p><strong>Website:</strong> <a href="https://calinnahaiciuc.github.io">calinnahaiciuc.github.io</a></p>
+          <p><strong>Bandcamp:</strong> <a href="https://marcusaburelius.bandcamp.com">marcusaburelius.bandcamp.com</a></p>
+          <p><strong>Instagram:</strong> <a href="https://instagram.com/aburelius">@aburelius</a></p>
           <p><strong>Locație:</strong> Cluj-Napoca, România</p>
         </div>
       </div>
@@ -100,7 +101,7 @@ const fs = require('fs');
           <div class="pdf-text">${bioText}</div>
         </div>
         <div class="pdf-statement-col">
-          <h3 class="pdf-subheading">Statement & Credo</h3>
+          <h3 class="pdf-subheading">Statement</h3>
           <div class="pdf-credo-list">${statementList}</div>
         </div>
       </div>
@@ -110,7 +111,7 @@ const fs = require('fs');
     const cvPage = document.createElement('div');
     cvPage.className = 'pdf-page pdf-cv-page';
     cvPage.innerHTML = `
-      <h2 class="pdf-section-heading">CV ARTISTIC (PARCURS & PROIECTE RELEVANTE)</h2>
+      <h2 class="pdf-section-heading">SCURT CV ARTISTIC</h2>
       <div class="pdf-cv-container">${cvText}</div>
     `;
 
@@ -133,50 +134,50 @@ const fs = require('fs');
 
     // Expand New Media slices & create splash-screen style image collages on the left
     document.querySelectorAll('.nm-project-slice').forEach(el => {
-        el.classList.add('expanded');
-        const gallery = el.querySelector('.nm-gallery');
-        if (gallery) {
-            let mediaList = [];
-            try {
-                const rawMedia = gallery.getAttribute('data-media');
-                if (rawMedia) mediaList = JSON.parse(rawMedia);
-            } catch (e) {}
+      el.classList.add('expanded');
+      const gallery = el.querySelector('.nm-gallery');
+      if (gallery) {
+        let mediaList = [];
+        try {
+          const rawMedia = gallery.getAttribute('data-media');
+          if (rawMedia) mediaList = JSON.parse(rawMedia);
+        } catch (e) { }
 
-            const imageItems = mediaList.filter(item => item.type === 'img' || (item.src && (item.src.endsWith('.webp') || item.src.endsWith('.jpeg') || item.src.endsWith('.png') || item.src.endsWith('.jpg'))));
+        const imageItems = mediaList.filter(item => item.type === 'img' || (item.src && (item.src.endsWith('.webp') || item.src.endsWith('.jpeg') || item.src.endsWith('.png') || item.src.endsWith('.jpg'))));
 
-            if (imageItems.length > 0) {
-                const collageContainer = document.createElement('div');
-                collageContainer.className = 'pdf-nm-collage';
+        if (imageItems.length > 0) {
+          const collageContainer = document.createElement('div');
+          collageContainer.className = 'pdf-nm-collage';
 
-                let spans = [];
-                if (imageItems.length >= 6) {
-                    collageContainer.classList.add('collage-6');
-                    spans = ['span-2-2', 'span-1-1', 'span-1-1', 'span-2-1', 'span-1-1', 'span-1-1'];
-                } else if (imageItems.length === 3 || imageItems.length === 4) {
-                    collageContainer.classList.add('collage-4');
-                    spans = ['span-2-2', 'span-1-1', 'span-1-1', 'span-2-1'];
-                } else {
-                    collageContainer.classList.add('collage-default');
-                    spans = ['span-2-2', 'span-1-1', 'span-2-1', 'span-1-1'];
-                }
+          let spans = [];
+          if (imageItems.length >= 6) {
+            collageContainer.classList.add('collage-6');
+            spans = ['span-2-2', 'span-1-1', 'span-1-1', 'span-2-1', 'span-1-1', 'span-1-1'];
+          } else if (imageItems.length === 3 || imageItems.length === 4) {
+            collageContainer.classList.add('collage-4');
+            spans = ['span-2-2', 'span-1-1', 'span-1-1', 'span-2-1'];
+          } else {
+            collageContainer.classList.add('collage-default');
+            spans = ['span-2-2', 'span-1-1', 'span-2-1', 'span-1-1'];
+          }
 
-                imageItems.forEach((item, i) => {
-                    const img = document.createElement('img');
-                    img.src = item.src;
-                    img.className = `pdf-collage-img ${spans[i] || 'span-1-1'}`;
-                    collageContainer.appendChild(img);
-                });
+          imageItems.forEach((item, i) => {
+            const img = document.createElement('img');
+            img.src = item.src;
+            img.className = `pdf-collage-img ${spans[i] || 'span-1-1'}`;
+            collageContainer.appendChild(img);
+          });
 
-                gallery.innerHTML = '';
-                gallery.appendChild(collageContainer);
-            }
+          gallery.innerHTML = '';
+          gallery.appendChild(collageContainer);
         }
+      }
     });
 
     // 5. GROUP MARCUS ABURELIUS MAIN ALBUMS (2 PER PAGE, FULL-WIDTH EDGE-TO-EDGE COLOR STRIPS)
     const mainReleasesSection = document.querySelector('#music-section .releases-list:not(.dynamic-section)') || document.querySelector('#music-section .releases-list');
     const mainAlbumCards = Array.from(mainReleasesSection ? mainReleasesSection.querySelectorAll('.release-card') : []);
-    
+
     for (let i = 0; i < mainAlbumCards.length; i += 2) {
       const pageWrapper = document.createElement('div');
       pageWrapper.className = 'pdf-page pdf-albums-page';
@@ -197,7 +198,7 @@ const fs = require('fs');
     if (singlesSection && compilationsSection) {
       const singlesCompPage = document.createElement('div');
       singlesCompPage.className = 'pdf-page pdf-singles-compilations-page';
-      
+
       // Main Category Title 1: SINGLE-URI (Grey border)
       const singlesTitle = document.createElement('h2');
       singlesTitle.className = 'pdf-section-heading-dark';
@@ -206,7 +207,7 @@ const fs = require('fs');
       singlesCompPage.appendChild(singlesTitle);
 
       const subSections = Array.from(singlesSection.querySelectorAll('.sub-section'));
-      
+
       // Sub-block 1: Drept Aburelius
       if (subSections[0]) {
         const block1 = document.createElement('div');
@@ -255,7 +256,7 @@ const fs = require('fs');
     if (otherReleasesSections.length > 0) {
       const otherReleasesPage = document.createElement('div');
       otherReleasesPage.className = 'pdf-page pdf-other-releases-page';
-      
+
       const otherHeader = document.createElement('div');
       otherHeader.className = 'pdf-other-header';
       otherHeader.innerHTML = '<h2 class="pdf-section-heading-dark" style="margin: 0 !important; padding: 1.2rem 2.5rem 0.6rem !important; border-bottom: 2px solid #aaaaaa !important;">ALTE LANSĂRI</h2>';
@@ -500,6 +501,17 @@ const fs = require('fs');
         align-items: center !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
+      }
+      .pdf-page .nm-logo {
+        height: 77vh !important;
+      }
+      .pdf-page .nm-logo.unicorner-logo {
+        width: 90vh !important;
+        height: 140vh !important;
+      }
+      .pdf-page .nm-logo.oracolul-logo {
+        height: 110vh !important;
+        transform: scale(1.8);
       }
       .pdf-albums-page .release-card.layout-right {
         flex-direction: row-reverse !important;
@@ -1010,8 +1022,9 @@ const fs = require('fs');
     margin: { top: 0, right: 0, bottom: 0, left: 0 }
   });
 
-  fs.writeFileSync('Portofoliu_Calin_Nahaiciuc_Design_Affinity.pdf', pdfBuffer);
-
+  const outputPath = require('path').join('D:\\', 'release assets', 'promo', 'portofoliu', 'Portofoliu_Calin_Nahaiciuc_Design_Affinity.pdf');
+  fs.writeFileSync(outputPath, pdfBuffer);
+  
   await browser.close();
-  console.log('PDF generated successfully as Portofoliu_Calin_Nahaiciuc_Design_Affinity.pdf');
+  console.log('PDF generated successfully as ' + outputPath);
 })();
