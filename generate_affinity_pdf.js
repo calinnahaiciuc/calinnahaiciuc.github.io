@@ -4,7 +4,10 @@ const fs = require('fs');
 
 (async () => {
   console.log("Starting Puppeteer for Portfolio PDF...");
-  const browser = await puppeteer.launch({ protocolTimeout: 300000 });
+  const browser = await puppeteer.launch({ 
+    protocolTimeout: 300000,
+    args: ['--allow-file-access-from-files']
+  });
   const page = await browser.newPage();
 
   page.on('console', msg => console.log('PAGE LOG:', msg.text()));
@@ -13,24 +16,41 @@ const fs = require('fs');
   page.setDefaultNavigationTimeout(0);
   page.setDefaultTimeout(0);
 
-  await page.setRequestInterception(true);
-  page.on('request', req => {
-    const url = req.url().toLowerCase();
-    if (url.includes('bandcamp.com') || url.includes('soundcloud.com') || url.includes('youtube.com') || url.includes('sndcdn.com')) {
-      req.abort();
-    } else {
-      req.continue();
+
+
+  let htmlContent = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf8');
+  
+  console.log("Base64 encoding images to bypass local file restrictions in setContent...");
+  // Find all instances of "imagini/..." (both in src="..." and JSON "src":"...")
+  const imgRegex = /(["'])(imagini\/.*?)\1/g;
+  htmlContent = htmlContent.replace(imgRegex, (match, quote, p1) => {
+    try {
+      const imgPath = path.resolve(__dirname, decodeURI(p1));
+      if (fs.existsSync(imgPath)) {
+        const ext = path.extname(imgPath).toLowerCase().substring(1);
+        const mimeType = ext === 'jpg' || ext === 'jpeg' ? 'image/jpeg' : `image/${ext}`;
+        const base64Data = fs.readFileSync(imgPath, 'base64');
+        return `${quote}data:${mimeType};base64,${base64Data}${quote}`;
+      }
+    } catch (e) {
+      console.log(`Failed to base64 encode image: ${p1}`);
     }
+    return match;
   });
 
-  const { pathToFileURL } = require('url');
-  const filePath = pathToFileURL(path.resolve(__dirname, 'index.html')).href;
-  console.log(`Navigating to ${filePath}...`);
+  console.log(`Setting HTML content...`);
   await page.setViewport({ width: 1200, height: 800 });
-  await page.goto(filePath, { waitUntil: 'domcontentloaded' });
+  try {
+    await page.setContent(htmlContent, { waitUntil: 'domcontentloaded', timeout: 30000 });
+  } catch(e) {
+    console.log("setContent timed out, proceeding...");
+  }
 
   console.log("Formatting DOM for PDF export...");
-  await page.evaluate(() => {
+  const coverBgBuffer = fs.readFileSync(path.resolve(__dirname, 'imagini/general/background.webp'));
+  const coverBgBase64 = `data:image/webp;base64,${coverBgBuffer.toString('base64')}`;
+
+  await page.evaluate((coverBgBase64) => {
     // Extract Bio, Statement, and CV contents before clearing
     let bioText = '';
     const bioMatch = document.documentElement.innerHTML.match(/<!--\s*PDF_3RD_PERSON_BIO_START([\s\S]*?)PDF_3RD_PERSON_BIO_END\s*-->/);
@@ -108,29 +128,25 @@ const fs = require('fs');
     `;
 
     // 3. CREATE CV ARTISTIC PAGE (Flows naturally across pages without cropping)
+    let processedCvText = cvText;
+    if (processedCvText) {
+        processedCvText = processedCvText.replace('CONFERINȚE, BURSE &amp; MENTIUNI', '<div style="page-break-before: always; display: block; height: 1rem;"></div>CONFERINȚE, BURSE &amp; MENTIUNI');
+        processedCvText = processedCvText.replace('CONFERINȚE, BURSE & MENTIUNI', '<div style="page-break-before: always; display: block; height: 1rem;"></div>CONFERINȚE, BURSE & MENTIUNI');
+    }
     const cvPage = document.createElement('div');
     cvPage.className = 'pdf-page pdf-cv-page';
     cvPage.innerHTML = `
       <h2 class="pdf-section-heading">SCURT CV ARTISTIC</h2>
-      <div class="pdf-cv-container">${cvText}</div>
+      <div class="pdf-cv-container">${processedCvText}</div>
     `;
 
-    // 4. CREATE FINAL PAGE
-    const finalPage = document.createElement('div');
-    finalPage.className = 'pdf-page pdf-final-page';
-    finalPage.innerHTML = `
-      <div class="pdf-final-content">
-        <h2>PORTOFOLIU ARTISTIC CĂLIN NAHAICIUC</h2>
-        <p>Versiunea interactivă web & lucrările complete: <br><strong style="font-size:1.4rem; color:#ff9800;">calinnahaiciuc.github.io</strong></p>
-        <p style="margin-top: 2rem;">Contact direct pentru rezidențe & proiecte: <br><strong>calinnahaiciuc@proton.me</strong></p>
-      </div>
-    `;
+    // Final page removed as per user choice.
 
     // Prepend coverPage directly to body to avoid portfolio-content padding offsets
     document.body.prepend(coverPage);
     coverPage.after(bioPage);
     bioPage.after(cvPage);
-    document.body.appendChild(finalPage);
+    bioPage.after(cvPage);
 
     // Expand New Media slices & create splash-screen style image collages on the left
     document.querySelectorAll('.nm-project-slice').forEach(el => {
@@ -139,8 +155,13 @@ const fs = require('fs');
       if (gallery) {
         let mediaList = [];
         try {
+          const rawPdfMedia = gallery.getAttribute('data-pdf-media');
           const rawMedia = gallery.getAttribute('data-media');
-          if (rawMedia) mediaList = JSON.parse(rawMedia);
+          if (rawPdfMedia) {
+            mediaList = JSON.parse(rawPdfMedia);
+          } else if (rawMedia) {
+            mediaList = JSON.parse(rawMedia);
+          }
         } catch (e) { }
 
         const imageItems = mediaList.filter(item => item.type === 'img' || (item.src && (item.src.endsWith('.webp') || item.src.endsWith('.jpeg') || item.src.endsWith('.png') || item.src.endsWith('.jpg'))));
@@ -149,29 +170,118 @@ const fs = require('fs');
           const collageContainer = document.createElement('div');
           collageContainer.className = 'pdf-nm-collage';
 
-          let spans = [];
-          if (imageItems.length >= 6) {
-            collageContainer.classList.add('collage-6');
-            spans = ['span-2-2', 'span-1-1', 'span-1-1', 'span-2-1', 'span-1-1', 'span-1-1'];
-          } else if (imageItems.length === 3 || imageItems.length === 4) {
-            collageContainer.classList.add('collage-4');
-            spans = ['span-2-2', 'span-1-1', 'span-1-1', 'span-2-1'];
-          } else {
-            collageContainer.classList.add('collage-default');
-            spans = ['span-2-2', 'span-1-1', 'span-2-1', 'span-1-1'];
-          }
+          collageContainer.classList.add('collage-dynamic');
 
           imageItems.forEach((item, i) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = `pdf-collage-item img-${i}`;
+            wrapper.style.position = 'relative';
+            wrapper.style.display = 'flex';
+            wrapper.style.flexDirection = 'column';
+            wrapper.style.gap = '4px';
+
             const img = document.createElement('img');
             img.src = item.src;
-            img.className = `pdf-collage-img ${spans[i] || 'span-1-1'}`;
-            collageContainer.appendChild(img);
+            img.className = 'pdf-collage-img';
+            img.style.flex = '1';
+            img.style.minHeight = '0';
+            wrapper.appendChild(img);
+
+            if (item.caption || item.pdfCaption) {
+               const caption = document.createElement('div');
+               caption.className = 'pdf-collage-caption';
+               caption.style.fontSize = '0.65rem';
+               caption.style.color = '#777777';
+               caption.style.lineHeight = '1.2';
+               caption.style.marginTop = '2px';
+               let text = item.pdfCaption ? item.pdfCaption : item.caption.replace(/^\d+\s*-\s*/, '');
+               caption.innerText = text;
+               wrapper.appendChild(caption);
+            }
+            
+            collageContainer.appendChild(wrapper);
           });
+
+          // Insert nm-info into the collage container to create a puzzle/masonry effect
+          const nmInfo = el.querySelector('.nm-info');
+          if (nmInfo) {
+            // vary the position dynamically based on project title length or randomly
+            let insertPos = el.id === 'project-unicorner' ? 0 : 1; 
+            if (collageContainer.children.length > insertPos) {
+                collageContainer.insertBefore(nmInfo, collageContainer.children[insertPos]);
+            } else {
+                collageContainer.appendChild(nmInfo);
+            }
+          }
 
           gallery.innerHTML = '';
           gallery.appendChild(collageContainer);
         }
       }
+    });
+
+    // Apply Varianta B: Camouflaged URL text for Affinity auto-linking
+    document.querySelectorAll('.release-card, .grid-item').forEach(item => {
+        const coverLink = item.querySelector('.cover-link');
+        const title = item.querySelector('.album-title, .track-title, .project-title');
+        
+        if (coverLink) {
+            // Invisible text over artwork
+            const hiddenTextImg = document.createElement('div');
+            hiddenTextImg.innerText = coverLink.href;
+            hiddenTextImg.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; color: #121212; font-size: 28px; overflow: hidden; line-height: 1; z-index: 10; word-break: break-all; opacity: 0.02; user-select: none; pointer-events: none;';
+            coverLink.style.position = 'relative';
+            coverLink.appendChild(hiddenTextImg);
+        }
+
+        if (coverLink && title) {
+            // Invisible text over title
+            const hiddenTextTitle = document.createElement('div');
+            hiddenTextTitle.innerText = coverLink.href;
+            hiddenTextTitle.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; color: #121212; font-size: 14px; overflow: hidden; line-height: 1; z-index: 10; word-break: break-all; opacity: 0.02; user-select: none; pointer-events: none;';
+            title.style.position = 'relative';
+            title.appendChild(hiddenTextTitle);
+
+            if (!title.querySelector('a')) {
+                const a = document.createElement('a');
+                a.href = coverLink.href;
+                a.target = '_blank';
+                a.style.cssText = 'color: inherit; text-decoration: none; position: relative; z-index: 20;';
+                a.innerHTML = title.innerHTML;
+                title.innerHTML = '';
+                title.appendChild(a);
+            }
+        }
+    });
+
+    // Fix first page links for Affinity auto-detection
+    document.querySelectorAll('.pdf-cover-meta a').forEach(link => {
+        if (!link.innerText.includes('https://') && !link.href.startsWith('mailto:')) {
+            const hiddenUrl = document.createElement('span');
+            hiddenUrl.innerText = ' ' + link.href;
+            hiddenUrl.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; color: #121212; font-size: 16px; overflow: hidden; opacity: 0.02; z-index: 10; pointer-events: none;';
+            link.style.position = 'relative';
+            link.appendChild(hiddenUrl);
+        }
+    });
+
+    // Remove Wikipedia highlights and their styling for PDF
+    document.querySelectorAll('.wiki-hover-trigger').forEach(trigger => {
+        let textContent = '';
+        trigger.childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+                textContent += node.textContent;
+            }
+        });
+        const textNode = document.createTextNode(textContent);
+        trigger.parentNode.replaceChild(textNode, trigger);
+    });
+
+    // Fix link colors in PDF to prevent default blue
+    document.querySelectorAll('.nm-metadata a').forEach(a => {
+        a.style.color = '#ffffff';
+        a.style.textDecoration = 'underline';
+        a.style.textDecorationColor = 'rgba(255, 255, 255, 0.4)';
     });
 
     // 5. GROUP MARCUS ABURELIUS MAIN ALBUMS (2 PER PAGE, FULL-WIDTH EDGE-TO-EDGE COLOR STRIPS)
@@ -184,7 +294,7 @@ const fs = require('fs');
       if (i === 0) {
         const pageTitle = document.createElement('div');
         pageTitle.className = 'pdf-albums-header';
-        pageTitle.innerHTML = '<h2 class="pdf-section-heading" style="margin: 0 !important; padding: 1.2rem 2.5rem 0.6rem !important;">ALBUME MUZICALE (MARCUS ABURELIUS)</h2>';
+        pageTitle.innerHTML = '<h2 class="pdf-section-heading" style="margin: 0 !important; padding: 1.2rem 2.5rem 0.6rem !important;">ALBUME MUZICALE (MARCUS ABURELIUS)</h2><p style="margin: -0.2rem 0 1rem 0; padding: 0 2.5rem; color: #777777; font-size: 0.85rem; font-style: italic;">*titlurile release-urilor funcționează ca link-uri interactive</p>';
         pageWrapper.appendChild(pageTitle);
       }
       const pair = mainAlbumCards.slice(i, i + 2);
@@ -271,6 +381,21 @@ const fs = require('fs');
       });
     }
 
+    // 8. FINAL NEW MEDIA PAGE
+    const finalPage = document.createElement('div');
+    finalPage.className = 'pdf-page pdf-final-page';
+    finalPage.innerHTML = `
+      <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 100vh; padding: 4rem; background-color: #121212; color: #f0f0f0;">
+        <p style="font-size: 1.35rem; line-height: 1.8; max-width: 650px; margin-bottom: 2.5rem; font-weight: 300;">
+          Pentru o experiență 'new media' a portofoliului — unde puteți asculta discografia integrală, urmări documentația video a proiectelor și testa aplicațiile interactive —, vă invit să accesați platforma web:
+        </p>
+        <div style="font-size: 1.6rem; color: #f0f0f0; font-weight: 500; font-family: monospace;">
+          👉 <a href="https://calinnahaiciuc.github.io" target="_blank" style="color: #f0f0f0; text-decoration: underline;">https://calinnahaiciuc.github.io</a>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(finalPage);
+
     // Inject dedicated PDF print styles
     const style = document.createElement('style');
     style.innerHTML = `
@@ -327,7 +452,7 @@ const fs = require('fs');
         width: 100vw !important;
         padding: 0 !important;
         margin: 0 !important;
-        background-image: url('imagini/general/background.webp') !important;
+        background-image: url('${coverBgBase64}') !important;
         background-size: cover !important;
         background-position: center center !important;
         background-repeat: no-repeat !important;
@@ -353,6 +478,12 @@ const fs = require('fs');
         text-align: center !important;
         padding: 2rem !important;
       }
+      /* Global Links */
+      .pdf-page a {
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+
       .pdf-cover-name {
         font-size: 3.5rem !important;
         letter-spacing: 4px !important;
@@ -517,21 +648,28 @@ const fs = require('fs');
         flex-direction: row-reverse !important;
       }
       .pdf-albums-page .image-container {
-        flex: 0 0 190px !important;
-        min-width: 190px !important;
-        max-width: 190px !important;
+        flex: 0 0 280px !important;
+        min-width: 280px !important;
+        max-width: 280px !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
       }
+      .pdf-albums-page .cover-link {
+        display: block !important;
+        width: 280px !important;
+        height: 280px !important;
+        position: relative !important;
+        z-index: 50 !important;
+      }
       .pdf-albums-page .cover-image {
-        width: 190px !important;
-        height: 190px !important;
-        max-width: 190px !important;
-        max-height: 190px !important;
+        width: 280px !important;
+        height: 280px !important;
+        max-width: 280px !important;
+        max-height: 280px !important;
         object-fit: cover !important;
         border-radius: 6px !important;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.35) !important;
+        box-shadow: none !important;
       }
       .pdf-albums-page .content-container {
         flex: 1 !important;
@@ -612,10 +750,21 @@ const fs = require('fs');
         align-items: center !important;
         text-align: center !important;
       }
+      .pdf-singles-compilations-block .grid-item .player-wrapper,
+      .pdf-singles-compilations-block .grid-item .video-wrapper,
+      .pdf-albums-page .player-wrapper,
+      .pdf-albums-page .video-wrapper,
+      .pdf-other-releases-page .player-wrapper,
+      .pdf-other-releases-page .video-wrapper {
+        display: none !important;
+        content: none !important;
+      }
       .pdf-singles-compilations-block .grid-item .cover-link {
         display: block !important;
         width: 100% !important;
         max-width: 185px !important;
+        position: relative !important;
+        z-index: 50 !important;
       }
       .pdf-singles-compilations-block .grid-item .cover-image {
         width: 185px !important;
@@ -624,7 +773,7 @@ const fs = require('fs');
         max-height: 185px !important;
         object-fit: cover !important;
         border-radius: 6px !important;
-        box-shadow: 0 5px 14px rgba(0,0,0,0.18) !important;
+        box-shadow: none !important;
       }
       .pdf-singles-compilations-block .track-title {
         font-size: 0.8rem !important;
@@ -670,15 +819,22 @@ const fs = require('fs');
         flex-direction: row-reverse !important;
       }
       .pdf-other-releases-page .image-container {
-        flex: 0 0 160px !important;
-        min-width: 160px !important;
-        max-width: 160px !important;
+        flex: 0 0 220px !important;
+        min-width: 220px !important;
+        max-width: 220px !important;
+      }
+      .pdf-other-releases-page .cover-link {
+        display: block !important;
+        width: 220px !important;
+        height: 220px !important;
+        position: relative !important;
+        z-index: 50 !important;
       }
       .pdf-other-releases-page .cover-image {
-        width: 160px !important;
-        height: 160px !important;
-        max-width: 160px !important;
-        max-height: 160px !important;
+        width: 220px !important;
+        height: 220px !important;
+        max-width: 220px !important;
+        max-height: 220px !important;
         object-fit: cover !important;
         border-radius: 6px !important;
       }
@@ -735,8 +891,8 @@ const fs = require('fs');
       }
       .nm-project-slice {
         width: 100vw !important;
-        height: 100vh !important;
-        max-height: 100vh !important;
+        height: auto !important;
+        max-height: none !important;
         min-height: 100vh !important;
         padding: 2.5rem 3rem !important;
         margin: 0 !important;
@@ -746,7 +902,9 @@ const fs = require('fs');
         flex-direction: column !important;
         justify-content: flex-start !important;
         box-sizing: border-box !important;
-        overflow: hidden !important;
+        overflow: visible !important;
+        page-break-after: always !important;
+        break-after: page !important;
       }
       
       .nm-header {
@@ -765,10 +923,10 @@ const fs = require('fs');
         flex: 1 !important;
         display: flex !important;
         flex-direction: column !important;
-        height: 100% !important;
+        height: auto !important;
         min-width: 0 !important;
         min-height: 0 !important;
-        overflow: hidden !important;
+        overflow: visible !important;
       }
       .nm-grid {
         display: flex !important;
@@ -818,6 +976,9 @@ const fs = require('fs');
         align-items: center !important;
         justify-content: flex-start !important;
       }
+      .nm-logo-link {
+        display: block !important;
+      }
       .nm-logo,
       .nm-logo-link img {
         height: 90px !important;
@@ -831,7 +992,7 @@ const fs = require('fs');
         padding: 0 !important;
       }
 
-      /* 2.5X LARGER SIZING SPECIFICALLY FOR UNICORNER AND ORACOLUL 2000 LOGOS */
+      /* BASE SIZING FOR NEW MEDIA LOGOS */
       .unicorner-logo,
       .oracolul-logo,
       .nm-logo.unicorner-logo,
@@ -843,6 +1004,23 @@ const fs = require('fs');
         width: auto !important;
         max-width: 240px !important;
         object-fit: contain !important;
+      }
+
+      /* 2.5X LARGER SIZING VIA TRANSFORM TO AVOID LAYOUT DEADLOCKS */
+      #new-media-section .nm-logo.unicorner-logo {
+        transform: rotate(90deg) scale(2.0) !important;
+      }
+      #new-media-section .nm-logo.oracolul-logo {
+        transform: scale(2.2) translateY(-2%) !important;
+      }
+
+      /* HIDE TOOLTIPS IN PDF TO PREVENT LAYOUT LOOPS */
+      [data-tooltip]::after,
+      [data-tooltip]::before,
+      .nm-logo-link::after,
+      .nm-logo-link::before {
+        display: none !important;
+        content: none !important;
       }
       
       .nm-header-text {
@@ -864,98 +1042,84 @@ const fs = require('fs');
         color: #d0d0d0 !important;
       }
       
+      .nm-projects-list::before,
+      .nm-projects-list::after,
+      .nm-project-slice::before,
+      .nm-project-slice::after {
+        display: none !important;
+        content: none !important;
+      }
+      
       .nm-expanded-content {
         max-height: none !important;
         opacity: 1 !important;
         visibility: visible !important;
         flex: 1 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        overflow: hidden !important;
+        display: block !important;
+        overflow: visible !important;
       }
       .nm-grid {
-        display: flex !important;
-        flex-direction: row !important;
-        gap: 2rem !important;
-        flex: 1 !important;
-        overflow: hidden !important;
+        display: block !important;
+        position: relative !important;
+        width: 100% !important;
+        overflow: visible !important;
       }
       .nm-gallery {
-        flex: 1.1 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-        height: 100% !important;
-        min-width: 0 !important;
-        min-height: 0 !important;
+        display: block !important;
+        width: 100% !important;
+        position: relative !important;
       }
       .pdf-nm-collage {
-        display: grid !important;
-        grid-template-columns: 1.2fr 1fr !important;
-        grid-auto-flow: dense !important;
-        gap: 12px !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 2rem 2.5rem !important;
         width: 100% !important;
-        height: 100% !important;
-        flex: 1 !important;
+        height: auto !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
         box-sizing: border-box !important;
       }
-      .pdf-nm-collage.collage-6 {
-        grid-template-columns: 1.2fr 1fr !important;
-        grid-template-rows: repeat(4, 1fr) !important;
-      }
-      .pdf-nm-collage.collage-4 {
-        grid-template-columns: 1.3fr 1fr !important;
-        grid-template-rows: repeat(3, 1fr) !important;
-      }
-      .pdf-nm-collage.collage-default {
-        grid-template-columns: 1.2fr 1fr !important;
-        grid-template-rows: repeat(3, 1fr) !important;
+      .pdf-collage-item {
+        flex: 1 1 40% !important;
+        max-width: 48% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        position: relative !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
       }
       .pdf-nm-collage img {
         width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        border-radius: 6px !important;
-        display: block !important;
-        min-width: 0 !important;
-        min-height: 0 !important;
-        box-shadow: 0 4px 14px rgba(0,0,0,0.35) !important;
-      }
-      .pdf-nm-collage .span-2-2 {
-        grid-column: span 2 !important;
-        grid-row: span 2 !important;
-      }
-      .pdf-nm-collage .span-2-1 {
-        grid-column: span 2 !important;
-        grid-row: span 1 !important;
-      }
-      .pdf-nm-collage .span-1-2 {
-        grid-column: span 1 !important;
-        grid-row: span 2 !important;
-      }
-      .pdf-nm-collage .span-1-1 {
-        grid-column: span 1 !important;
-        grid-row: span 1 !important;
-      }
-      .nm-gallery-main img, .nm-gallery-main video {
-        display: none !important;
-      }
-      .nm-gallery-main img.active, .nm-gallery-main video.active {
-        display: block !important;
-        max-height: 300px !important;
-        max-width: 100% !important;
+        height: auto !important;
+        max-height: 32vh !important;
         object-fit: contain !important;
         border-radius: 6px !important;
+        display: block !important;
+        box-shadow: none !important;
+      }
+      
+      .nm-gallery-main {
+        display: none !important;
       }
       .nm-gallery-caption {
-        font-size: 0.8rem !important;
+        font-size: 0.75rem !important;
         color: #bbbbbb !important;
-        margin-top: 0.4rem !important;
+        margin-top: 0.5rem !important;
+        text-align: center !important;
       }
       .nm-info {
-        flex: 1 !important;
+        flex: 1 1 40% !important;
+        max-width: 48% !important;
+        min-width: 320px !important;
+        position: relative !important;
+        margin-top: 0 !important;
         font-size: 0.85rem !important;
         line-height: 1.4 !important;
+        background: transparent !important;
+        text-shadow: none !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
       }
       .nm-metadata {
         list-style: none !important;
@@ -980,37 +1144,12 @@ const fs = require('fs');
         color: #ffffff !important;
       }
 
-      /* 7. FINAL PAGE */
-      .pdf-final-page {
-        height: 100vh !important;
-        max-height: 100vh !important;
-        min-height: 100vh !important;
-        padding: 2.5rem 3rem !important;
-        text-align: center !important;
-        align-items: center !important;
-        justify-content: center !important;
-        background: #0a0a0c !important;
-        display: flex !important;
-        flex-direction: column !important;
-        overflow: hidden !important;
-      }
-      .pdf-final-content h2 {
-        font-size: 2.2rem !important;
-        letter-spacing: 3px !important;
-        margin-bottom: 1.5rem !important;
-        color: #ffffff !important;
-      }
-      .pdf-final-content p {
-        font-size: 1.1rem !important;
-        line-height: 1.6 !important;
-        color: #e0e0e0 !important;
-      }
       .about-wrapper, #about-section, .divider {
         display: none !important;
       }
     `;
     document.head.appendChild(style);
-  });
+  }, coverBgBase64);
 
   console.log("Generating PDF file...");
   await page.emulateMediaType('screen');
